@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/leukotex_logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="description" content="LEUKOTEX — A creative development studio focused on immersive digital experiences, WebGL, Three.js, and interactive websites." />
+    <title>LEUKOTEX Studio — Immersive Digital Experiences</title>
+    
+    <!-- Google Fonts: Poppins, Chewy & Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Chewy&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  </head>
+  <body class="bg-black text-white font-body selection:bg-neon-pink selection:text-white">
+    <!-- SVG Filters for Cartoon and Neon Effects -->
+    <svg aria-hidden="true" focusable="false" style="width: 0; height: 0; position: absolute;">
+      <defs>
+        <filter id="toon" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+          <feColorMatrix type="saturate" values="1.9" result="sat"/>
+          <feComponentTransfer in="sat" result="post">
+            <feFuncR type="discrete" tableValues="0.08 0.3 0.52 0.74 0.96"/>
+            <feFuncG type="discrete" tableValues="0.08 0.3 0.52 0.74 0.96"/>
+            <feFuncB type="discrete" tableValues="0.1 0.32 0.55 0.78 1"/>
+          </feComponentTransfer>
+          <feMorphology in="post" operator="erode" radius="1" result="er"/>
+          <feComposite in="er" in2="post" operator="arithmetic" k1="0" k2="0.55" k3="0.45" k4="0"/>
+        </filter>
+        <linearGradient id="neon" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#7ec6ff"/><stop offset=".35" stop-color="#7dffb2"/>
+          <stop offset=".65" stop-color="#ffe86a"/><stop offset="1" stop-color="#ff8ad4"/>
+        </linearGradient>
+        <linearGradient id="neon2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#b18cff"/><stop offset=".5" stop-color="#7ec6ff"/><stop offset="1" stop-color="#7dffb2"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

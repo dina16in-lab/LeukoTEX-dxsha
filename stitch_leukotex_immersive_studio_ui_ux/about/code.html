@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&amp;family=Inter:wght@400;500&amp;family=Geist:wght@400;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#454747", "tertiary-fixed": "#e2e2e2", "inverse-primary": "#5d5f5f", "text-secondary": "#E5E5E5", "surface-bright": "#3a3939", "inverse-surface": "#e5e2e1", "on-tertiary-fixed": "#1a1c1c", "on-primary": "#2f3131", "error": "#ffb4ab", "on-tertiary": "#2f3131", "on-tertiary-fixed-variant": "#454747", "error-container": "#93000a", "on-secondary-fixed-variant": "#004a79", "primary-fixed": "#e2e2e2", "surface-container-low": "#1c1b1b", "glow-accent": "rgba(24, 160, 251, 0.3)", "inverse-on-surface": "#313030", "on-error": "#690005", "surface-muted": "#121212", "on-secondary-fixed": "#001d34", "tertiary-container": "#e2e2e2", "secondary-fixed": "#cfe5ff", "surface-container-lowest": "#0e0e0e", "surface-container": "#201f1f", "secondary": "#9acbff", "primary": "#ffffff", "on-tertiary-container": "#636565", "surface-variant": "#353534", "secondary-fixed-dim": "#9acbff", "secondary-container": "#0099f3", "tertiary-fixed-dim": "#c6c6c7", "primary-container": "#e2e2e2", "border-metallic": "#2A2A2A", "outline-variant": "#444748", "surface-dim": "#131313", "surface-container-highest": "#353534", "surface-tint": "#c6c6c7", "background": "#131313", "on-primary-container": "#636565", "on-background": "#e5e2e1", "on-error-container": "#ffdad6", "surface": "#131313", "on-secondary-container": "#002e4e", "outline": "#8e9192", "surface-container-high": "#2a2a2a", "on-secondary": "#003355", "tertiary": "#ffffff", "primary-fixed-dim": "#c6c6c7", "on-primary-fixed": "#1a1c1c" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "section-gap": "160px", "margin-desktop": "80px", "margin-mobile": "24px", "unit": "8px", "gutter": "24px" }, "fontFamily": { "label-mono": ["Geist"], "body-md": ["Inter"], "label-caps": ["Geist"], "headline-lg-mobile": ["Sora"], "headline-lg": ["Sora"], "headline-display": ["Sora"] }, "fontSize": { "label-mono": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "400" }], "body-md": ["16px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400" }], "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.2em", "fontWeight": "700" }], "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }], "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "500" }], "headline-display": ["84px", { "lineHeight": "92px", "letterSpacing": "-0.04em", "fontWeight": "600" }] } } } };</script><style>@layer base { body { overscroll-behavior: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } } .nav-blur { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }</style></head><body class="bg-background text-on-background font-body-md text-body-md"><header class="fixed top-0 w-full z-50 pt-safe transition-all duration-500 nav-blur bg-background/60"><div class="h-20 px-margin-mobile flex items-center justify-between"><div class="flex flex-col"><span class="font-headline-lg-mobile text-[18px] tracking-[0.2em] uppercase font-bold text-primary">LEUKOTEX</span><span class="font-label-mono text-label-mono text-outline uppercase">Studio</span></div><div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><button class="p-2 text-primary"><span class="material-symbols-outlined text-[32px]">menu</span></button></div></div></header><main class="relative w-full pt-20 bg-background"><div class="flex flex-col w-full">
+<!-- Hero Section -->
+<section class="w-full min-h-[60vh] flex flex-col justify-center px-margin-mobile lg:px-margin-desktop py-section-gap relative overflow-hidden">
+<!-- Atmospheric Background Blur -->
+<div class="absolute inset-0 pointer-events-none opacity-20" style="background: radial-gradient(circle at 50% 50%, var(--glow-accent) 0%, transparent 60%); filter: blur(60px);"></div>
+<div class="relative z-10 max-w-4xl">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-widest block mb-8">About LEUKOTEX</span>
+<h1 class="font-headline-display text-[48px] lg:text-headline-display text-primary uppercase font-semibold leading-tight mb-6">
+        Engineering visual narratives for the digital avant-garde.
+      </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        A creative development studio focused on immersive digital experiences. We blend technical mastery with cinematic noir aesthetics to build interfaces that feel alive, mysterious, and intentional.
+      </p>
+</div>
+</section>
+<!-- Split Panel: Story & Portrait -->
+<section class="w-full px-margin-mobile lg:px-margin-desktop py-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-gutter relative">
+<div class="flex flex-col gap-8 order-2 lg:order-1 pt-12 lg:pt-0 justify-center">
+<div>
+<span class="font-label-mono text-label-mono text-primary uppercase mb-4 block flex items-center gap-2">
+<span class="w-4 h-[1px] bg-primary block"></span> THE STORY
+        </span>
+<h2 class="font-headline-lg-mobile lg:text-headline-lg text-primary mb-6">Origins of a Digital Atelier.</h2>
+<p class="font-body-md text-on-surface-variant mb-6 text-lg leading-relaxed">
+          Founded on the principle that software should feel like high art, LEUKOTEX began as an experiment in minimalist interaction design. We rejected the cluttered, noisy web in favor of quiet confidence and vast negative space.
+        </p>
+<p class="font-body-md text-outline">
+          Our journey is marked by an obsession with typography, motion, and the subtle interplay of light and shadow in digital environments. We don't just build sites; we architect atmospheric experiences.
+        </p>
+</div>
+</div>
+<div class="order-1 lg:order-2 relative aspect-[3/4] lg:aspect-square w-full rounded-DEFAULT overflow-hidden group">
+<!-- 3D Tilt Effect Wrapper -->
+<div class="w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.02] bg-surface-muted" data-alt="A moody, high-contrast black and white portrait of a visionary creative director in a dimly lit, minimalist studio space. The lighting is cinematic noir, with sharp shadows and subtle highlights on their face, conveying quiet authority and technical mastery. Subtle futuristic elements in the background, like metallic reflections or soft azure glowing screens, hint at a high-end digital agency." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQuUxHMPSqetbEEBnzySdEtMjnQ6jGszIfeAJ_npIWbOKs4Llblz1Ab7ET1ikKV9bIGg9zeDeDcgojyrS_Ugi3teZ-EwndkbpnXlOIbIzQ0B4CFV7a_jeYeEYSG-gOl8DI-j1Up_7vu5_SBRGjiuRpAAWWGNo28E6qEfmBMp2WUO-6idcvlzDkBO4vSprL_YEslR903OSmSZn5tylqvQnpmkirJ3tiuIXXkPJTZYHO8mXzJQQBIB0R')">
+<!-- Scrim -->
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-6 left-6 right-6 flex justify-between items-end opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+<span class="font-label-mono text-label-mono text-primary uppercase">Founder / Visionary</span>
+<span class="material-symbols-outlined text-primary text-[20px]">arrow_outward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Timeline / Approach -->
+<section class="w-full bg-surface-container-low py-section-gap px-margin-mobile lg:px-margin-desktop relative overflow-hidden">
+<div class="max-w-4xl mx-auto flex flex-col gap-16 relative z-10">
+<div class="text-center">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-widest block mb-4">The Methodology</span>
+<h2 class="font-headline-lg-mobile lg:text-headline-lg text-primary">Cinematic Precision.</h2>
+</div>
+<!-- Timeline Items -->
+<div class="flex flex-col gap-12 border-l border-border-metallic ml-4 pl-8 lg:ml-12 lg:pl-16 relative">
+<!-- Abstract glowing line -->
+<div class="absolute left-[-1px] top-0 w-[2px] h-0 bg-glow-accent timeline-progress transition-all duration-1000 ease-out"></div>
+<div class="relative group cursor-pointer">
+<div class="absolute -left-[37px] lg:-left-[69px] top-1 w-3 h-3 rounded-full bg-surface-variant border border-border-metallic group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(24,160,251,0.5)] transition-all duration-400"></div>
+<span class="font-label-mono text-label-mono text-outline uppercase mb-2 block">Phase 01 / Discovery</span>
+<h3 class="font-headline-lg-mobile text-[24px] text-primary mb-3 transition-colors duration-400 group-hover:text-secondary-fixed">Atmospheric Research</h3>
+<p class="font-body-md text-on-surface-variant max-w-xl">We begin by defining the emotional resonance of the project. Immersing ourselves in the brand's identity to establish a mood board that speaks in shadows, light, and architectural grids.</p>
+</div>
+<div class="relative group cursor-pointer">
+<div class="absolute -left-[37px] lg:-left-[69px] top-1 w-3 h-3 rounded-full bg-surface-variant border border-border-metallic group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(24,160,251,0.5)] transition-all duration-400"></div>
+<span class="font-label-mono text-label-mono text-outline uppercase mb-2 block">Phase 02 / Design</span>
+<h3 class="font-headline-lg-mobile text-[24px] text-primary mb-3 transition-colors duration-400 group-hover:text-secondary-fixed">Structural Minimalism</h3>
+<p class="font-body-md text-on-surface-variant max-w-xl">Stripping away the non-essential. We construct high-contrast layouts relying on vast negative space and precise typographic hierarchies, treating every pixel as a deliberate gallery piece.</p>
+</div>
+<div class="relative group cursor-pointer">
+<div class="absolute -left-[37px] lg:-left-[69px] top-1 w-3 h-3 rounded-full bg-surface-variant border border-border-metallic group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(24,160,251,0.5)] transition-all duration-400"></div>
+<span class="font-label-mono text-label-mono text-outline uppercase mb-2 block">Phase 03 / Engineering</span>
+<h3 class="font-headline-lg-mobile text-[24px] text-primary mb-3 transition-colors duration-400 group-hover:text-secondary-fixed">Fluid Execution</h3>
+<p class="font-body-md text-on-surface-variant max-w-xl">Bringing the static to life with physics-based motion and glassmorphic depth. Our code is written to be as elegant as the visual design, ensuring performance meets aesthetic demands.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills & Technologies Grid (Bento Style) -->
+<section class="w-full px-margin-mobile lg:px-margin-desktop py-section-gap flex flex-col gap-12">
+<div class="flex flex-col gap-4">
+<span class="font-label-mono text-label-mono text-primary uppercase block flex items-center gap-2">
+<span class="w-4 h-[1px] bg-primary block"></span> ARSENAL
+      </span>
+<h2 class="font-headline-lg-mobile lg:text-headline-lg text-primary">Capabilities.</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-unit auto-rows-[240px]">
+<!-- Tech Stack List -->
+<div class="col-span-1 md:col-span-2 lg:col-span-1 bg-surface-muted border border-border-metallic p-8 flex flex-col justify-between hover:bg-surface-container-high transition-colors duration-500 rounded-DEFAULT relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-glow-accent to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-700"></div>
+<span class="font-label-caps text-label-caps text-outline uppercase relative z-10">Technologies</span>
+<ul class="flex flex-col gap-3 relative z-10">
+<li class="font-label-mono text-[14px] text-primary flex items-center justify-between border-b border-border-metallic pb-2">WebGL / Three.js <span class="material-symbols-outlined text-[16px] text-outline">architecture</span></li>
+<li class="font-label-mono text-[14px] text-primary flex items-center justify-between border-b border-border-metallic pb-2">React / Next.js <span class="material-symbols-outlined text-[16px] text-outline">code</span></li>
+<li class="font-label-mono text-[14px] text-primary flex items-center justify-between border-b border-border-metallic pb-2">Tailwind CSS <span class="material-symbols-outlined text-[16px] text-outline">style</span></li>
+<li class="font-label-mono text-[14px] text-primary flex items-center justify-between">GSAP / Framer Motion <span class="material-symbols-outlined text-[16px] text-outline">animation</span></li>
+</ul>
+</div>
+<!-- Abstract 3D Visual -->
+<div class="col-span-1 md:col-span-1 lg:col-span-1 bg-surface-muted border border-border-metallic p-1 flex items-center justify-center relative overflow-hidden rounded-DEFAULT group" data-alt="Abstract macro photography of intricate metallic robotic components and gears. High contrast monochrome styling with deep black shadows and sharp specular highlights on the brushed steel textures. A subtle, low-opacity azure blue light source hints at advanced technology and computational power." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBrTlzCMdCqFo6VYJaBxO_2yMeaMaAjNv5a-ygddqzDn0ITGqjuwZ7nTJk-5F8_mLnnAotqcjjt7zxkuIQB4gC7KYSgd2ury-_nX1_uMMXytfhBEXmowDA8UsnerQswMFi_Hpdb8CbqkER4bV0aHcbvUZisgelAnAQFDBdBp1x2rZltwILy_BM87rCxmKGT0t2lY6tNvFuO3lWj1cAC6KFJ3fSQzqDjbGc-EoCTL8fWhdcLq939cdOD')">
+<div class="absolute inset-0 bg-background/40 group-hover:bg-background/20 transition-colors duration-500"></div>
+<span class="relative z-10 font-headline-display text-[64px] text-primary opacity-50 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay blur-[2px] group-hover:blur-0">LTX</span>
+</div>
+<!-- Skills List -->
+<div class="col-span-1 md:col-span-1 lg:col-span-1 bg-surface-muted border border-border-metallic p-8 flex flex-col justify-between hover:bg-surface-container-high transition-colors duration-500 rounded-DEFAULT relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-bl from-glow-accent to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-700"></div>
+<span class="font-label-caps text-label-caps text-outline uppercase relative z-10">Disciplines</span>
+<div class="flex flex-wrap gap-2 relative z-10 mt-auto">
+<span class="px-3 py-1 bg-background border border-border-metallic text-primary font-label-mono text-[10px] uppercase rounded-full">Art Direction</span>
+<span class="px-3 py-1 bg-background border border-border-metallic text-primary font-label-mono text-[10px] uppercase rounded-full">Creative Dev</span>
+<span class="px-3 py-1 bg-background border border-border-metallic text-primary font-label-mono text-[10px] uppercase rounded-full">UX/UI Design</span>
+<span class="px-3 py-1 bg-background border border-border-metallic text-primary font-label-mono text-[10px] uppercase rounded-full">Motion Graphics</span>
+<span class="px-3 py-1 bg-background border border-border-metallic text-primary font-label-mono text-[10px] uppercase rounded-full">3D Modeling</span>
+</div>
+</div>
+<!-- Quote / Manifesto Panel -->
+<div class="col-span-1 md:col-span-2 lg:col-span-3 bg-primary text-on-primary p-8 md:p-12 flex flex-col justify-center items-center text-center rounded-DEFAULT hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-shadow duration-700">
+<span class="material-symbols-outlined text-[32px] text-on-primary-fixed-variant mb-6 opacity-50">format_quote</span>
+<p class="font-headline-lg-mobile lg:text-[40px] leading-tight max-w-4xl">
+          "We do not build utility; we build atmosphere. In a sea of templates, intentionality is the ultimate luxury."
+        </p>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="w-full py-section-gap px-margin-mobile flex flex-col items-center justify-center text-center border-t border-border-metallic relative">
+<!-- Abstract radial glow behind CTA -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-secondary/5 rounded-full blur-[80px] pointer-events-none"></div>
+<span class="font-label-mono text-label-mono text-outline uppercase mb-6">Initiate Sequence</span>
+<h2 class="font-headline-lg-mobile text-primary mb-12">Ready to elevate your digital presence?</h2>
+<button class="group relative px-8 py-4 bg-primary text-on-primary font-label-caps uppercase tracking-widest overflow-hidden rounded-DEFAULT transition-all duration-400 hover:scale-105 active:scale-95">
+<span class="relative z-10 flex items-center gap-3">
+        Discuss a Project
+        <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+</span>
+<div class="absolute inset-0 bg-secondary opacity-0 group-hover:opacity-10 transition-opacity duration-400"></div>
+</button>
+</section>
+</div>
+<script>
+  // Simple micro-interaction for timeline scroll progress
+  document.addEventListener('DOMContentLoaded', () => {
+    const timelineSection = document.querySelector('.timeline-progress');
+    if(timelineSection) {
+        window.addEventListener('scroll', () => {
+            const section = timelineSection.closest('section');
+            const rect = section.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            
+            // Calculate how far we've scrolled into the section
+            let progress = 0;
+            if (rect.top < viewportHeight && rect.bottom > 0) {
+                const totalScrollable = rect.height + viewportHeight;
+                const scrolled = viewportHeight - rect.top;
+                progress = Math.min(1, Math.max(0, scrolled / totalScrollable));
+            }
+            
+            // Apply progress to timeline line height
+            timelineSection.style.height = `${progress * 100}%`;
+        });
+    }
+  });
+</script><footer class="w-full bg-surface-container-lowest px-margin-mobile py-section-gap flex flex-col gap-12"><div class="flex flex-col gap-gutter"><span class="font-label-caps text-label-caps text-outline uppercase">Statement</span><p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Engineering visual narratives for the digital avant-garde.</p></div><div class="grid grid-cols-2 gap-gutter"><div class="flex flex-col gap-2"><span class="font-label-mono text-label-mono text-outline uppercase">Connect</span><a class="text-on-surface hover:text-primary transition-colors" href="#">GitHub</a><a class="text-on-surface hover:text-primary transition-colors" href="#">LinkedIn</a><a class="text-on-surface hover:text-primary transition-colors" href="#">Instagram</a></div><div class="flex flex-col gap-2"><span class="font-label-mono text-label-mono text-outline uppercase">Legal</span><a class="text-on-surface hover:text-primary transition-colors" href="#">Privacy</a><a class="text-on-surface hover:text-primary transition-colors" href="#">Terms</a></div></div><div class="pt-12 border-t border-border-metallic flex justify-between items-center"><span class="font-label-mono text-label-mono text-outline uppercase">© 2024 LEUKOTEX</span><span class="material-symbols-outlined text-outline">change_history</span></div></footer></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-background/90 nav-blur" data-active-classes="text-primary scale-110"><div class="h-20 flex justify-around items-center px-gutter"><a class="flex flex-col items-center gap-1 text-on-surface-variant transition-all duration-300" data-path="work" href="#"><span class="material-symbols-outlined">grid_view</span><span class="font-label-mono text-[9px] uppercase tracking-tighter">Work</span></a><a class="flex flex-col items-center gap-1 text-on-surface-variant transition-all duration-300" data-path="services" href="#"><span class="material-symbols-outlined">layers</span><span class="font-label-mono text-[9px] uppercase tracking-tighter">Services</span></a><a aria-current="page" class="flex flex-col items-center gap-1 transition-all duration-300 text-primary scale-110" data-path="about" href="#"><span class="material-symbols-outlined">info</span><span class="font-label-mono text-[9px] uppercase tracking-tighter">About</span></a><a class="flex flex-col items-center gap-1 text-on-surface-variant transition-all duration-300" data-path="contact" href="#"><span class="material-symbols-outlined">mail</span><span class="font-label-mono text-[9px] uppercase tracking-tighter">Contact</span></a></div></nav></body></html>

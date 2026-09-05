@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --glow-accent: rgba(126, 198, 255, 0.15); /* neon-blue glow */
+  }
+
+  html {
+    background-color: #F5F5DC;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #F5F5DC;
+    color: #3E2723;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+}
+
+@layer utilities {
+  .nav-blur {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .glass-pill {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.2s ease;
+  }
+  
+  .glass-pill:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .toon-filter {
+    filter: url(#toon);
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
+
+/* Material Symbols sizing and alignment */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* LEUKOTEX Minimal Premium Cursor — performance-first, no blur/particles */
+:root {
+  --cursor-accent: #3E2723;
+  --cursor-accent-soft: rgba(62, 39, 35, 0.13);
+  --cursor-pink: #E8A0BF; /* subtle LEUKOTEX lilac-pink (from logo #C9A0DC→#FF9E9E) */
+  --cursor-pink-hover: rgba(232, 160, 191, 0.42);
+}
+
+/* Only hide native cursor on devices with precise pointer */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button, [role="button"], .cursor-pointer, [data-cursor] {
+    cursor: none;
+  }
+  /* Restore native text cursor where needed — do not block selection */
+  input, textarea, select, [contenteditable="true"] {
+    cursor: text !important;
+  }
+  /* Ensure children inside text fields keep text cursor */
+  input *, textarea * {
+    cursor: text !important;
+  }
+}
+
+/* Touch / mobile / tablet — keep native cursor, hide custom cursor layer */
+@media (pointer: coarse), (hover: none) {
+  body, a, button, [role="button"], .cursor-pointer {
+    cursor: auto !important;
+  }
+  .custom-cursor-dot-wrap,
+  .custom-cursor-ring-wrap {
+    display: none !important;
+  }
+}
+
+/* Reduced motion — disable cursor animations, keep cursor functional */
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    transition: none !important;
+  }
+}
+
+/* Ensure custom cursor never blocks interaction */
+.custom-cursor-dot-wrap,
+.custom-cursor-ring-wrap {
+  pointer-events: none;
+}
+
+/* 3D tilt perspective container */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Interactive Dot Field Background — never block interaction */
+.particle-dot-field {
+  pointer-events: none;
+  will-change: contents;
+}
+
+/* Touch / mobile / tablet — hide dot field entirely */
+@media (pointer: coarse), (hover: none) {
+  .particle-dot-field {
+    display: none !important;
+  }
+}
+
+/* Reduced motion — dot field still renders but no animation (handled in JS) */
+@media (prefers-reduced-motion: reduce) {
+  .particle-dot-field {
+    will-change: auto;
+  }
+}

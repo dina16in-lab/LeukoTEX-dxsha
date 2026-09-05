@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&amp;family=Inter:wght@400;500&amp;family=Geist:wght@400;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#454747", "tertiary-fixed": "#e2e2e2", "inverse-primary": "#5d5f5f", "text-secondary": "#E5E5E5", "surface-bright": "#3a3939", "inverse-surface": "#e5e2e1", "on-tertiary-fixed": "#1a1c1c", "on-primary": "#2f3131", "error": "#ffb4ab", "on-tertiary": "#2f3131", "on-tertiary-fixed-variant": "#454747", "error-container": "#93000a", "on-secondary-fixed-variant": "#004a79", "primary-fixed": "#e2e2e2", "surface-container-low": "#1c1b1b", "glow-accent": "rgba(24, 160, 251, 0.3)", "inverse-on-surface": "#313030", "on-error": "#690005", "surface-muted": "#121212", "on-secondary-fixed": "#001d34", "tertiary-container": "#e2e2e2", "secondary-fixed": "#cfe5ff", "surface-container-lowest": "#0e0e0e", "surface-container": "#201f1f", "secondary": "#9acbff", "primary": "#ffffff", "on-tertiary-container": "#636565", "surface-variant": "#353534", "secondary-fixed-dim": "#9acbff", "secondary-container": "#0099f3", "tertiary-fixed-dim": "#c6c6c7", "primary-container": "#e2e2e2", "border-metallic": "#2A2A2A", "outline-variant": "#444748", "surface-dim": "#131313", "surface-container-highest": "#353534", "surface-tint": "#c6c6c7", "background": "#131313", "on-primary-container": "#636565", "on-background": "#e5e2e1", "on-error-container": "#ffdad6", "surface": "#131313", "on-secondary-container": "#002e4e", "outline": "#8e9192", "surface-container-high": "#2a2a2a", "on-secondary": "#003355", "tertiary": "#ffffff", "primary-fixed-dim": "#c6c6c7", "on-primary-fixed": "#1a1c1c" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "section-gap": "160px", "margin-desktop": "80px", "margin-mobile": "24px", "unit": "8px", "gutter": "24px" }, "fontFamily": { "label-mono": ["Geist"], "body-md": ["Inter"], "label-caps": ["Geist"], "headline-lg-mobile": ["Sora"], "headline-lg": ["Sora"], "headline-display": ["Sora"] }, "fontSize": { "label-mono": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "400" }], "body-md": ["16px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400" }], "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.2em", "fontWeight": "700" }], "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }], "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "500" }], "headline-display": ["84px", { "lineHeight": "92px", "letterSpacing": "-0.04em", "fontWeight": "600" }] } } } };</script><style>@layer base { body { overscroll-behavior: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } } .nav-blur { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); } #shader-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }</style></head><body class="bg-background text-on-background font-body-md text-body-md bg-transparent">
+<canvas id="shader-bg"></canvas>
+<header class="fixed top-0 w-full z-50 pt-safe transition-all duration-500 nav-blur bg-background/60"><div class="h-20 px-margin-mobile flex items-center justify-between"><div class="flex flex-col w-32 h-10">
+<!-- STITCH_SVG_START:ANIMATION_14 class="" --><div id="animated-svg-ANIMATION_14" class="" style="display:block;width:100%;height:100%;min-height:200px;"><svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#cccccc" />
+    </linearGradient>
+  </defs>
+  
+  <g fill="none" stroke="url(#logoGrad)" stroke-width="4">
+    <!-- Outer technical path -->
+    <path d="M100 100 L300 100 L300 300 L100 300 Z">
+      <animate attributeName="stroke-dasharray" from="0, 800" to="800, 0" dur="3s" fill="freeze" />
+    </path>
+    
+    <!-- Abstract 'L' construction -->
+    <path d="M150 150 L150 250 L250 250" stroke-width="8" stroke-linecap="round">
+      <animate attributeName="stroke-dashoffset" from="300" to="0" dur="2s" fill="freeze" />
+      <animate attributeName="stroke-dasharray" from="300" to="300" dur="2s" fill="freeze" />
+    </path>
+    
+    <!-- Animated data nodes -->
+    <circle cx="150" cy="150" r="6" fill="#ffffff">
+      <animate attributeName="r" values="6;8;6" dur="2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle cx="250" cy="250" r="6" fill="#ffffff">
+      <animate attributeName="r" values="6;8;6" dur="2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="1;0.5;1" dur="2s" begin="1s" repeatCount="indefinite" />
+    </circle>
+  </g>
+  
+  <text x="200" y="360" text-anchor="middle" font-family="Sora, sans-serif" font-weight="700" font-size="24" fill="#ffffff" style="letter-spacing: 4px;">
+    LEUKOTEX
+    <animate attributeName="opacity" values="0;1" dur="2s" fill="freeze" />
+  </text>
+</svg></div><!-- STITCH_SVG_END:ANIMATION_14 -->
+</div><div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><button class="p-2 text-primary"><span class="material-symbols-outlined text-[32px]">menu</span></button></div></div></header><main class="relative w-full pt-20 bg-transparent"><div class="flex flex-col w-full relative">
+<!-- Hero Section -->
+<section class="relative w-full h-[85vh] flex flex-col justify-end pb-12 overflow-hidden px-margin-mobile bg-transparent">
+<div class="absolute inset-0 w-full h-full z-0 flex items-center justify-center" id="hero-robot-container">
+<!-- 3D Robot will be injected here -->
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 flex flex-col gap-6 w-full max-w-4xl opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" id="hero-content">
+<h1 class="font-headline-display text-headline-lg-mobile md:text-headline-display text-primary uppercase leading-tight font-bold tracking-tighter reveal-text">
+        Your Innovations,<br/>
+<span class="text-outline">We Create.</span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg reveal-text delay-100">
+        A creative development studio focused on immersive digital experiences and interactive websites.
+      </p>
+<div class="flex flex-col sm:flex-row gap-4 mt-4 reveal-text delay-200">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-caps text-label-caps uppercase hover:bg-tertiary transition-colors duration-400 ease-out flex items-center justify-center gap-2 group">
+          View Work
+          <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="border border-border-metallic text-primary px-8 py-4 rounded-full font-label-caps text-label-caps uppercase hover:bg-surface-container-high transition-all duration-400 ease-out flex items-center justify-center gap-2 group relative overflow-hidden bg-background/50 backdrop-blur-sm">
+<div class="absolute inset-0 bg-glow-accent opacity-0 group-hover:opacity-20 transition-opacity blur-md"></div>
+          Start a Project
+        </button>
+</div>
+</div>
+</section>
+<!-- About Minimal -->
+<section class="w-full py-section-gap px-margin-mobile flex flex-col gap-12 relative bg-transparent">
+<div class="flex items-center gap-4 text-outline font-label-mono text-label-mono uppercase tracking-widest reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700">
+<span>01</span>
+<div class="h-[1px] w-12 bg-border-metallic"></div>
+<span>About Leukotex</span>
+</div>
+<div class="reveal-on-scroll opacity-0 translate-y-8 transition-all duration-700 delay-100">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary max-w-3xl leading-snug reveal-text">
+        We architect the digital avant-garde. Blending high-end aesthetics with complex engineering to craft experiences that command attention.
+      </h2>
+</div>
+</section>
+<!-- Selected Work -->
+<section class="w-full py-section-gap px-margin-mobile flex flex-col gap-16 bg-transparent">
+<div class="flex justify-between items-end reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700">
+<div class="flex flex-col gap-2">
+<span class="font-label-mono text-label-mono text-outline uppercase tracking-widest reveal-text">02 // Selected Work</span>
+<h3 class="font-headline-lg text-headline-lg-mobile text-primary reveal-text delay-100">Case Studies</h3>
+</div>
+<button class="hidden md:flex text-primary font-label-caps text-label-caps uppercase hover:text-secondary transition-colors items-center gap-2 reveal-text delay-200">
+        View All <span class="material-symbols-outlined text-[16px]">north_east</span>
+</button>
+</div>
+<div class="flex flex-col gap-12">
+<!-- Project 01 -->
+<article class="group relative w-full rounded-2xl overflow-hidden bg-surface-container-low/80 backdrop-blur-sm border border-border-metallic reveal-on-scroll opacity-0 translate-y-8 transition-all duration-700 tilt-card">
+<div class="relative h-64 md:h-96 w-full overflow-hidden">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out" data-alt="A minimalist, futuristic dashboard interface glowing with neon blue data visualizations against a stark black background. High contrast, precise geometric lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXQfUSHxD3ANyv_sR3pkDm-_h-RpZOpPD3AArN9nsn7tq31NJKp6Pz7V5ur1scNrIJu9yNjGYvlBkSK2UUa29eIgnqg67cQzojDARFjnnWgaUYHRYcT0TThYswPT_pZKFOiWbiONFDiUIFlxfFh9Uq4B24NQqYV_hdFyWWVgOs07V8ual-ppxaLP7XZBWaLIA2BV_-he703EMP1xb1yJw6qCjd5kJuPlhhXen56dSZo3QyoclF8jU8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-6 flex flex-col gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<div class="flex gap-2 mb-2">
+<span class="px-2 py-1 rounded-sm bg-surface-variant/80 backdrop-blur-md text-on-surface-variant font-label-mono text-[10px] uppercase">WebGL</span>
+<span class="px-2 py-1 rounded-sm bg-surface-variant/80 backdrop-blur-md text-on-surface-variant font-label-mono text-[10px] uppercase">Three.js</span>
+</div>
+<h4 class="font-headline-lg-mobile text-2xl text-primary font-semibold">Nexus Protocol</h4>
+<p class="font-body-md text-sm text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">Immersive data visualization platform for high-frequency trading analytics.</p>
+</div>
+</article>
+<!-- Project 02 -->
+<article class="group relative w-full rounded-2xl overflow-hidden bg-surface-container-low/80 backdrop-blur-sm border border-border-metallic reveal-on-scroll opacity-0 translate-y-8 transition-all duration-700 tilt-card">
+<div class="relative h-64 md:h-96 w-full overflow-hidden">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out" data-alt="An abstract 3D glassmorphism sculpture floating in a dark, empty space. Soft azure inner glows illuminate the complex geometry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD48qp-RMkU9Ag64FV81dbhXB4wFPoEpYoQx6fgPmBKqTtvFuqVwp_0218WlJKMFo-9nvbYP8E0pMgz6ksLD_JnvELWDG4UJts4RI1ecPiQyYkmrsMt6hAwLqfs1OlUjstIFF651lKsQVJbnbzSR774x2FhqG_-HTA9QzgfDcYpvlgPO3Cz261Bn7i3yFZEzBR6XOBohPlwt-9X_3ola53lLZ3RPSKwg_9YaHJX9ElKTJhp5WG8RF3G"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-6 flex flex-col gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<div class="flex gap-2 mb-2">
+<span class="px-2 py-1 rounded-sm bg-surface-variant/80 backdrop-blur-md text-on-surface-variant font-label-mono text-[10px] uppercase">E-Commerce</span>
+<span class="px-2 py-1 rounded-sm bg-surface-variant/80 backdrop-blur-md text-on-surface-variant font-label-mono text-[10px] uppercase">Interactive</span>
+</div>
+<h4 class="font-headline-lg-mobile text-2xl text-primary font-semibold">Aura Spatial</h4>
+<p class="font-body-md text-sm text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">Next-generation spatial commerce experience for luxury fashion.</p>
+</div>
+</article>
+<button class="md:hidden w-full border border-border-metallic text-primary px-8 py-4 rounded-full font-label-caps text-label-caps uppercase hover:bg-surface-container-high transition-all bg-background/50 backdrop-blur-sm reveal-text">
+        View All Projects
+      </button>
+</div>
+</section>
+<!-- Services Preview -->
+<section class="w-full py-section-gap px-margin-mobile flex flex-col gap-12 bg-transparent relative">
+<span class="font-label-mono text-label-mono text-outline uppercase tracking-widest reveal-on-scroll opacity-0 translate-y-4 transition-all reveal-text">03 // Expertise</span>
+<div class="flex flex-col border-t border-border-metallic">
+<!-- Service Item 1 -->
+<div class="group flex flex-col md:flex-row md:items-center justify-between py-8 border-b border-border-metallic hover:bg-surface-container-low/50 transition-colors px-4 -mx-4 reveal-on-scroll opacity-0 translate-y-4 transition-all cursor-pointer backdrop-blur-sm">
+<h4 class="font-headline-lg-mobile text-2xl md:text-3xl text-on-surface group-hover:text-primary transition-colors reveal-text">3D Web Experiences</h4>
+<p class="font-body-md text-sm text-outline mt-2 md:mt-0 md:max-w-xs group-hover:text-on-surface-variant transition-colors reveal-text delay-100">WebGL and Three.js environments that break the boundaries of 2D space.</p>
+</div>
+<!-- Service Item 2 -->
+<div class="group flex flex-col md:flex-row md:items-center justify-between py-8 border-b border-border-metallic hover:bg-surface-container-low/50 transition-colors px-4 -mx-4 reveal-on-scroll opacity-0 translate-y-4 transition-all delay-75 cursor-pointer backdrop-blur-sm">
+<h4 class="font-headline-lg-mobile text-2xl md:text-3xl text-on-surface group-hover:text-primary transition-colors reveal-text">Digital Portfolios</h4>
+<p class="font-body-md text-sm text-outline mt-2 md:mt-0 md:max-w-xs group-hover:text-on-surface-variant transition-colors reveal-text delay-100">High-end editorial layouts designed for creative visionaries.</p>
+</div>
+<!-- Service Item 3 -->
+<div class="group flex flex-col md:flex-row md:items-center justify-between py-8 border-b border-border-metallic hover:bg-surface-container-low/50 transition-colors px-4 -mx-4 reveal-on-scroll opacity-0 translate-y-4 transition-all delay-150 cursor-pointer backdrop-blur-sm">
+<h4 class="font-headline-lg-mobile text-2xl md:text-3xl text-on-surface group-hover:text-primary transition-colors reveal-text">Creative Development</h4>
+<p class="font-body-md text-sm text-outline mt-2 md:mt-0 md:max-w-xs group-hover:text-on-surface-variant transition-colors reveal-text delay-100">Bespoke animations, interactions, and performant frontend architecture.</p>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="w-full py-section-gap px-margin-mobile flex flex-col items-center justify-center text-center gap-8 relative overflow-hidden bg-transparent">
+<div class="absolute inset-0 bg-glow-accent opacity-5 blur-[100px] rounded-full w-[150%] h-[150%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-display text-primary max-w-2xl uppercase tracking-tighter reveal-on-scroll opacity-0 scale-95 transition-all duration-1000 reveal-text">
+      Have an idea?<br/>Let's build it.
+    </h2>
+<button class="bg-primary text-on-primary px-10 py-5 rounded-full font-label-caps text-label-caps uppercase hover:bg-tertiary transition-transform hover:scale-105 duration-400 ease-out flex items-center justify-center gap-2 reveal-on-scroll opacity-0 translate-y-4 transition-all delay-200">
+      Start the Conversation
+    </button>
+</section>
+</div>
+<script>
+  // Initial load animation
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      const heroContent = document.getElementById('hero-content');
+      if(heroContent) {
+        heroContent.classList.remove('opacity-0', 'translate-y-8');
+      }
+      
+      document.querySelectorAll('.reveal-text').forEach((el, index) => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(20px)';
+          el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+          
+          setTimeout(() => {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+          }, 300 + (index * 100));
+      });
+    }, 100);
+
+    // Scroll reveal logic
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('opacity-0', 'translate-y-4', 'translate-y-8', 'scale-95');
+          
+          const texts = entry.target.querySelectorAll('.reveal-text');
+          texts.forEach((text, i) => {
+              setTimeout(() => {
+                  text.style.opacity = '1';
+                  text.style.transform = 'translateY(0)';
+              }, i * 100);
+          });
+          
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // 3D Tilt effect for cards on non-touch devices
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    if (!isTouchDevice) {
+      document.querySelectorAll('.tilt-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const rotateX = ((y - centerY) / centerY) * -5;
+          const rotateY = ((x - centerX) / centerX) * 5;
+          
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+      });
+    }
+
+    // Initialize 3D Robot
+    const container = document.getElementById('hero-robot-container');
+    if (container && typeof THREE !== 'undefined') {
+        const width = container.clientWidth || window.innerWidth;
+        const height = container.clientHeight || window.innerHeight;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+        scene.add(ambientLight);
+
+        const spotLight = new THREE.SpotLight(0xffffff, 2);
+        spotLight.position.set(10, 10, 10);
+        scene.add(spotLight);
+
+        const pointLight = new THREE.PointLight(0x4488ff, 1, 10);
+        pointLight.position.set(-5, -2, 5);
+        scene.add(pointLight);
+
+        // Original Robotic Character Construction (Head/Bust)
+        const robotGroup = new THREE.Group();
+
+        // Main Helmet/Head
+        const helmetGeom = new THREE.SphereGeometry(1, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.8);
+        const metalMat = new THREE.MeshPhongMaterial({ 
+            color: 0x222222, 
+            specular: 0x888888, 
+            shininess: 100 
+        });
+        const helmet = new THREE.Mesh(helmetGeom, metalMat);
+        robotGroup.add(helmet);
+
+        // Visor
+        const visorGeom = new THREE.SphereGeometry(1.02, 32, 32, 0, Math.PI, Math.PI * 0.3, Math.PI * 0.3);
+        const visorMat = new THREE.MeshPhongMaterial({ 
+            color: 0x050505, 
+            specular: 0xffffff, 
+            shininess: 200,
+            transparent: true,
+            opacity: 0.9
+        });
+        const visor = new THREE.Mesh(visorGeom, visorMat);
+        robotGroup.add(visor);
+
+        // Neck/Mechanical Core
+        const neckGeom = new THREE.CylinderGeometry(0.4, 0.6, 0.8, 16);
+        const neck = new THREE.Mesh(neckGeom, metalMat);
+        neck.position.y = -1.2;
+        robotGroup.add(neck);
+
+        // Internal blue glow
+        const coreGeom = new THREE.CylinderGeometry(0.3, 0.3, 0.6, 16);
+        const coreMat = new THREE.MeshBasicMaterial({ color: 0x00aaff });
+        const core = new THREE.Mesh(coreGeom, coreMat);
+        core.position.y = -1.2;
+        robotGroup.add(core);
+
+        scene.add(robotGroup);
+        camera.position.z = 4;
+
+        // Animation loop
+        let mouseX = 0;
+        let mouseY = 0;
+
+        window.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        const animate = () => {
+            requestAnimationFrame(animate);
+            
+            // Subtle float
+            robotGroup.position.y = Math.sin(Date.now() * 0.001) * 0.1;
+            
+            // Look at mouse
+            robotGroup.rotation.y += (mouseX * 0.3 - robotGroup.rotation.y) * 0.05;
+            robotGroup.rotation.x += (-mouseY * 0.2 - robotGroup.rotation.x) * 0.05;
+            
+            renderer.render(scene, camera);
+        };
+
+        animate();
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            const w = container.clientWidth || window.innerWidth;
+            const h = container.clientHeight || window.innerHeight;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        });
+    }
+
+    // Initialize WebGL Background Shader
+    const canvas = document.getElementById('shader-bg');
+    if (canvas) {
+        const gl = canvas.getContext('webgl');
+        if (gl) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const vertexShaderSource = `
+                attribute vec2 position;
+                varying vec2 v_texCoord;
+                void main() {
+                    gl_Position = vec4(position, 0.0, 1.0);
+                    v_texCoord = position * 0.5 + 0.5;
+                }
+            `;
+
+            const fragmentShaderSource = `
+                precision highp float;
+                varying vec2 v_texCoord;
+                uniform float u_time;
+                uniform vec2 u_resolution;
+                uniform vec2 u_mouse;
+
+                // Simplex noise for organic motion
+                vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+                float snoise(vec2 v) {
+                  const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+                  vec2 i  = floor(v + dot(v, C.yy));
+                  vec2 x0 = v -   i + dot(i, C.xx);
+                  vec2 i1;
+                  i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+                  vec4 x12 = x0.xyxy + C.xxzz;
+                  x12.xy -= i1;
+                  i = mod(i, 289.0);
+                  vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+                  vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+                  m = m*m; m = m*m;
+                  vec3 x = 2.0 * fract(p * C.www) - 1.0;
+                  vec3 h = abs(x) - 0.5;
+                  vec3 ox = floor(x + 0.5);
+                  vec3 a0 = x - ox;
+                  m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+                  vec3 g;
+                  g.x  = a0.x  * x0.x  + h.x  * x0.y;
+                  g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+                  return 130.0 * dot(m, g);
+                }
+
+                void main() {
+                    vec2 uv = v_texCoord;
+                    vec2 m = u_mouse / u_resolution;
+                    
+                    // Create liquid metal ripples based on time and mouse
+                    float n = snoise(uv * 3.0 + u_time * 0.1);
+                    n += snoise(uv * 6.0 - u_time * 0.15) * 0.5;
+                    n += snoise(uv * 10.0 + u_time * 0.2) * 0.25;
+                    
+                    // Distort UVs for the "liquid" look
+                    vec2 distortedUv = uv + vec2(n * 0.05);
+                    
+                    // Base color: Deep near-black
+                    vec3 baseColor = vec3(0.04, 0.04, 0.04);
+                    
+                    // Metallic highlights
+                    float highlight = pow(max(0.0, n), 3.0) * 0.15;
+                    vec3 metalColor = vec3(0.8, 0.8, 0.85) * highlight;
+                    
+                    // Subtle glow follow mouse
+                    float dist = distance(uv, m);
+                    float glow = exp(-dist * 4.0) * 0.05;
+                    vec3 accentGlow = vec3(0.4, 0.5, 0.6) * glow;
+                    
+                    vec3 color = baseColor + metalColor + accentGlow;
+                    
+                    // Add fine grain/noise
+                    float grain = snoise(uv * 500.0) * 0.02;
+                    color += grain;
+                    
+                    gl_FragColor = vec4(color, 1.0);
+                }
+            `;
+
+            function createShader(gl, type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                return shader;
+            }
+
+            const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+            const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+            gl.useProgram(program);
+
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+                -1.0, -1.0,
+                 1.0, -1.0,
+                -1.0,  1.0,
+                 1.0,  1.0
+            ]), gl.STATIC_DRAW);
+
+            const positionLocation = gl.getAttribLocation(program, "position");
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+            const timeLocation = gl.getUniformLocation(program, "u_time");
+            const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+            const mouseLocation = gl.getUniformLocation(program, "u_mouse");
+
+            let mouseX = 0, mouseY = 0;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = window.innerHeight - e.clientY;
+            });
+
+            function render(time) {
+                gl.viewport(0, 0, canvas.width, canvas.height);
+                gl.uniform1f(timeLocation, time * 0.001);
+                gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+                gl.uniform2f(mouseLocation, mouseX, mouseY);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                requestAnimationFrame(render);
+            }
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+
+            requestAnimationFrame(render);
+        }
+    }
+  });
+</script><footer class="w-full bg-surface-container-lowest/80 backdrop-blur-md px-margin-mobile py-section-gap flex flex-col gap-12 border-t border-border-metallic mt-12"><div class="flex flex-col gap-gutter"><span class="font-label-caps text-label-caps text-outline uppercase reveal-text">Statement</span><p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface reveal-text delay-100">Engineering visual narratives for the digital avant-garde.</p></div><div class="grid grid-cols-2 gap-gutter"><div class="flex flex-col gap-2 reveal-text delay-200"><span class="font-label-mono text-label-mono text-outline uppercase">Connect</span><a class="text-on-surface hover:text-primary transition-colors" href="#">GitHub</a><a class="text-on-surface hover:text-primary transition-colors" href="#">LinkedIn</a><a class="text-on-surface hover:text-primary transition-colors" href="#">Instagram</a></div><div class="flex flex-col gap-2 reveal-text delay-300"><span class="font-label-mono text-label-mono text-outline uppercase">Legal</span><a class="text-on-surface hover:text-primary transition-colors" href="#">Privacy</a><a class="text-on-surface hover:text-primary transition-colors" href="#">Terms</a></div></div><div class="pt-12 border-t border-border-metallic flex justify-between items-center reveal-text delay-400"><span class="font-label-mono text-label-mono text-outline uppercase">© 2024 LEUKOTEX</span><span class="material-symbols-outlined text-outline">change_history</span></div></footer></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-background/80 backdrop-blur-xl border-t border-border-metallic/50" data-active-classes="text-primary scale-110"><div class="h-20 flex justify-around items-center px-gutter"><a aria-current="page" class="flex flex-col items-center gap-1 transition-all duration-300 text-primary scale-110" data-path="work" href="#"><span class="material-symbols-outlined">grid_view</span><span class="font-label-mono text-[9px] uppercase tracking-tighter">Work</span></a><a class="flex flex-col items-center gap-1 text-on-surface-variant transition-all duration-300" data-path="services" href="#"><span class="material-symbols-outlined">layers</span><span class="font-label-mono text-[9px] uppercase tracking-tighter">Services</span></a><a class="flex flex-col items-center gap-1 text-on-surface-variant transition-all duration-300" data-path="about" href="#"><span class="material-symbols-outlined">info</span><span class="font-label-mono text-[9px] uppercase tracking-tighter">About</span></a><a class="flex flex-col items-center gap-1 text-on-surface-variant transition-all duration-300" data-path="contact" href="#"><span class="material-symbols-outlined">mail</span><span class="font-label-mono text-[9px] uppercase tracking-tighter">Contact</span></a></div></nav></body></html>
