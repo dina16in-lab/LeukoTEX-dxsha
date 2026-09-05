@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { AnimatedLogo } from './AnimatedLogo';
 
 export const Footer: React.FC = () => {
@@ -45,22 +46,28 @@ export const Footer: React.FC = () => {
             <h3 className="font-label-mono text-label-mono uppercase tracking-widest text-white">Navigation</h3>
             <ul className="flex flex-col gap-4">
               <li>
-                <a href="#services" className="font-body-md text-white hover:text-white transition-colors inline-block relative group">
+                <Link to="/#services" className="font-body-md text-white hover:text-white transition-colors inline-block relative group">
                   Services
                   <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-secondary group-hover:w-full transition-all duration-300"></span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#about" className="font-body-md text-white hover:text-white transition-colors inline-block relative group">
+                <Link to="/#about" className="font-body-md text-white hover:text-white transition-colors inline-block relative group">
                   About Studio
                   <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-secondary group-hover:w-full transition-all duration-300"></span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#contact" className="font-body-md text-white hover:text-white transition-colors inline-block relative group">
+                <Link to="/work" className="font-body-md text-white hover:text-white transition-colors inline-block relative group">
+                  Work
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-secondary group-hover:w-full transition-all duration-300"></span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/#contact" className="font-body-md text-white hover:text-white transition-colors inline-block relative group">
                   Contact
                   <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-secondary group-hover:w-full transition-all duration-300"></span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -100,8 +107,8 @@ export const Footer: React.FC = () => {
             &copy; {new Date().getFullYear()} LEUKOTEX STUDIO. ALL RIGHTS RESERVED.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="font-label-mono text-[10px] uppercase tracking-widest text-white hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="font-label-mono text-[10px] uppercase tracking-widest text-white hover:text-white transition-colors">Terms of Service</a>
+            <Link to="/privacy" className="font-label-mono text-[10px] uppercase tracking-widest text-white hover:text-white/80 transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="font-label-mono text-[10px] uppercase tracking-widest text-white hover:text-white/80 transition-colors">Terms of Service</Link>
           </div>
           <div className="font-label-mono text-[10px] uppercase tracking-widest text-white flex items-center gap-2">
             SYSTEM STATUS <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span> OPERATIONAL

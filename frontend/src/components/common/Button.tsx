@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 interface ButtonProps {
@@ -64,8 +65,16 @@ export const Button: React.FC<ButtonProps> = ({
   }`;
 
   if (to) {
+    // Internal routes use React Router Link
+    if (to.startsWith('/') || to.startsWith('#')) {
+      return (
+        <Link to={to} className={combinedClasses}>
+          {content}
+        </Link>
+      );
+    }
     return (
-      <a href={to.startsWith('/') ? `#${to.substring(1)}` : to} className={combinedClasses}>
+      <a href={to} className={combinedClasses}>
         {content}
       </a>
     );

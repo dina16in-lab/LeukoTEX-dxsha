@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface AnimatedLogoProps {
   compact?: boolean;
@@ -8,16 +9,16 @@ interface AnimatedLogoProps {
 export const AnimatedLogo: React.FC<AnimatedLogoProps> = ({ compact = false, className = '' }) => {
   if (compact) {
     return (
-      <a href="#home" className={`flex flex-col group ${className}`}>
+      <Link to="/" className={`flex flex-col group ${className}`}>
         <span className="font-headline-lg-mobile text-[18px] tracking-[0.2em] uppercase font-bold text-[#3E2723] transition-colors group-hover:text-[#3E2723]-fixed">
           LEUKOTEX
         </span>
-      </a>
+      </Link>
     );
   }
 
   return (
-    <a href="#home" className={`flex flex-col items-center gap-1 group ${className}`}>
+    <Link to="/" className={`flex flex-col items-center gap-1 group ${className}`}>
       <div className="w-16 h-16 relative flex-shrink-0 transition-transform duration-500 group-hover:scale-105">
         <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-md" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -48,7 +49,7 @@ export const AnimatedLogo: React.FC<AnimatedLogoProps> = ({ compact = false, cla
           LEUKOTEX
         </span>
       </div>
-    </a>
+    </Link>
   );
 };
 

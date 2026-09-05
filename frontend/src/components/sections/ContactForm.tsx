@@ -123,9 +123,11 @@ export const ContactForm: React.FC = () => {
             className={`peer w-full bg-transparent border-b py-4 text-[#3E2723] font-body-md focus:outline-none transition-colors focus:bg-white/10 ${
               validationErrors.name ? 'border-error text-error' : 'border-[#3E2723]/30 focus:border-[#3E2723]'
             }`}
+            aria-invalid={!!validationErrors.name}
+            aria-describedby={validationErrors.name ? 'name-error' : undefined}
           />
           {validationErrors.name && (
-            <span className="text-error font-label-mono text-[11px] mt-1.5 flex items-center gap-1">
+            <span id="name-error" role="alert" className="text-error font-label-mono text-[11px] mt-1.5 flex items-center gap-1">
               <span className="material-symbols-outlined text-[14px]">error</span>
               {validationErrors.name}
             </span>
@@ -155,9 +157,11 @@ export const ContactForm: React.FC = () => {
             className={`peer w-full bg-transparent border-b py-4 text-[#3E2723] font-body-md focus:outline-none transition-colors focus:bg-white/10 ${
               validationErrors.email ? 'border-error text-error' : 'border-[#3E2723]/30 focus:border-[#3E2723]'
             }`}
+            aria-invalid={!!validationErrors.email}
+            aria-describedby={validationErrors.email ? 'email-error' : undefined}
           />
           {validationErrors.email && (
-            <span className="text-error font-label-mono text-[11px] mt-1.5 flex items-center gap-1">
+            <span id="email-error" role="alert" className="text-error font-label-mono text-[11px] mt-1.5 flex items-center gap-1">
               <span className="material-symbols-outlined text-[14px]">error</span>
               {validationErrors.email}
             </span>
@@ -185,6 +189,8 @@ export const ContactForm: React.FC = () => {
             className={`w-full bg-transparent border-b py-4 px-2 text-[#3E2723] font-body-md focus:outline-none transition-colors appearance-none cursor-pointer rounded-t-md ${
               validationErrors.projectType ? 'border-error' : 'border-[#3E2723]/30 focus:border-[#3E2723]'
             }`}
+            aria-invalid={!!validationErrors.projectType}
+            aria-describedby={validationErrors.projectType ? 'project-type-error' : undefined}
           >
             <option value="" disabled className="bg-[#F5F5DC] text-[#3E2723]">
               Select project scope...
@@ -210,7 +216,7 @@ export const ContactForm: React.FC = () => {
           </span>
         </div>
         {validationErrors.projectType && (
-          <span className="text-error font-label-mono text-[11px] mt-1.5 flex items-center gap-1">
+          <span id="project-type-error" role="alert" className="text-error font-label-mono text-[11px] mt-1.5 flex items-center gap-1">
             <span className="material-symbols-outlined text-[14px]">error</span>
             {validationErrors.projectType}
           </span>
@@ -240,9 +246,11 @@ export const ContactForm: React.FC = () => {
           className={`peer w-full bg-transparent border-b py-4 text-[#3E2723] font-body-md focus:outline-none transition-colors resize-none focus:bg-white/10 ${
             validationErrors.description ? 'border-error text-error' : 'border-[#3E2723]/30 focus:border-[#3E2723]'
           }`}
+          aria-invalid={!!validationErrors.description}
+          aria-describedby={validationErrors.description ? 'description-error' : undefined}
         />
         {validationErrors.description && (
-          <span className="text-error font-label-mono text-[11px] mt-1.5 flex items-center gap-1">
+          <span id="description-error" role="alert" className="text-error font-label-mono text-[11px] mt-1.5 flex items-center gap-1">
             <span className="material-symbols-outlined text-[14px]">error</span>
             {validationErrors.description}
           </span>
@@ -275,7 +283,7 @@ export const ContactForm: React.FC = () => {
 
       {/* Error state alert */}
       {status === 'error' && (
-        <div className="p-4 rounded-lg bg-error/10 border border-error/30 text-error flex items-center gap-3 text-sm">
+        <div role="alert" className="p-4 rounded-lg bg-error/10 border border-error/30 text-error flex items-center gap-3 text-sm">
           <span className="material-symbols-outlined">error</span>
           <span>{errorMessage}</span>
         </div>

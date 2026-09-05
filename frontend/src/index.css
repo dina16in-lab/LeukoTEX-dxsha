@@ -138,6 +138,14 @@
   .custom-cursor-ring {
     transition: none !important;
   }
+
+  /* Disable all transitions and animations for reduced motion preference */
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Ensure custom cursor never blocks interaction */
@@ -170,3 +178,27 @@
     will-change: auto;
   }
 }
+
+/* ============================================
+   ACCESSIBILITY: Focus-visible styles
+   ============================================ */
+
+/* Global focus-visible ring for interactive elements */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #3E2723;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Input/textarea focus-visible with bottom-border style matching design */
+input:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  border-bottom-color: #3E2723 !important;
+  box-shadow: 0 2px 0 0 #3E2723;
+}
+

@@ -38,7 +38,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
         </p>
 
         <div className="mt-4">
-          <Button to="/contact" variant="primary" size="lg" icon="arrow_forward">
+          <Button to="/#contact" variant="primary" size="lg" icon="arrow_forward">
             {buttonText}
           </Button>
         </div>
