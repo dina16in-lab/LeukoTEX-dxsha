@@ -1,7 +1,13 @@
 import os
 from typing import List, Union
+
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+# backend/.env is located next to this config file's parent directory.
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ENV_FILE = os.path.join(BASE_DIR, ".env")
 
 
 class Settings(BaseSettings):
@@ -10,13 +16,15 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     API_V1_STR: str = "/api"
 
-    # PostgreSQL Database Configuration (Required, No Fallback)
+    # PostgreSQL Database Configuration
     DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5432/leukotex_db"
 
     # Security & JWT Token
-    SECRET_KEY: str = "leukotex-super-secret-jwt-signing-key-for-development-change-in-production"
+    SECRET_KEY: str = (
+        "leukotex-super-secret-jwt-signing-key-for-development-change-in-production"
+    )
     ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24 hours
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24
 
     # CORS
     CORS_ORIGINS: Union[List[str], str] = [
@@ -37,19 +45,29 @@ class Settings(BaseSettings):
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
-    def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
+    def assemble_cors_origins(
+        cls,
+        v: Union[str, List[str]],
+    ) -> List[str]:
         if isinstance(v, str) and not v.startswith("["):
             parsed = [i.strip() for i in v.split(",") if i.strip()]
-            # Never allow wildcard with credentials — filter it out
+
+            # Never allow wildcard with credentials.
             if "*" in parsed:
-                return [o for o in parsed if o != "*"] or ["http://localhost:5173"]
+                return [
+                    o for o in parsed if o != "*"
+                ] or ["http://localhost:5173"]
+
             return parsed
+
         elif isinstance(v, list):
-            # Filter wildcard from list as well
+            # Filter wildcard from list as well.
             if "*" in v:
                 filtered = [o for o in v if o != "*"]
                 return filtered or ["http://localhost:5173"]
+
             return v
+
         return ["http://localhost:5173"]
 
     @field_validator("SECRET_KEY")
@@ -57,16 +75,17 @@ class Settings(BaseSettings):
     def validate_secret_key(cls, v: str) -> str:
         if len(v) < 32:
             import warnings
+
             warnings.warn(
-                "SECRET_KEY is shorter than 32 characters — insecure for production. "
-                "Generate a strong key: openssl rand -hex 32"
+                "SECRET_KEY is shorter than 32 characters — insecure for production."
             )
+
         return v
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=ENV_FILE,
         env_file_encoding="utf-8",
-        extra="ignore"
+        extra="ignore",
     )
 
 
