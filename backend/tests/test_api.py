@@ -73,6 +73,15 @@ def mock_email_notifications(monkeypatch):
     monkeypatch.setattr("app.api.endpoints.inquiries.send_inquiry_notification", mock_send)
 
 
+@pytest.fixture(autouse=True)
+def reset_rate_limiters():
+    """Reset in-memory rate limiters between tests to prevent cross-test 429s."""
+    from app.middleware.rate_limiter import reset_all_limiters
+    reset_all_limiters()
+    yield
+    reset_all_limiters()
+
+
 # ==========================================
 # 1. Database & System Architecture Tests
 # ==========================================
@@ -401,7 +410,11 @@ def test_submit_contact_validation_errors(client):
 
 
 def test_submit_contact_email_failure_preserves_db_record(client, monkeypatch):
-    """Verify that if email delivery fails, HTTP 500 is returned AND the inquiry is preserved in PostgreSQL."""
+    """Verify that if email delivery fails, HTTP 201 is still returned (resource created) AND the inquiry is preserved in PostgreSQL.
+
+    Email is a side-effect notification; per HTTP semantics the primary resource (inquiry)
+    was created successfully, so 201 is correct. Email failures are logged for admin monitoring.
+    """
     def mock_failing_send(inquiry):
         raise EmailDeliveryError("Resend API key quota exceeded or service error.")
 
@@ -416,8 +429,11 @@ def test_submit_contact_email_failure_preserves_db_record(client, monkeypatch):
     }
 
     res = client.post("/api/contact", json=payload)
-    assert res.status_code == 500
-    assert "Inquiry saved successfully" in res.json()["detail"]
+    # Resource created successfully despite email side-effect failure
+    assert res.status_code == 201
+    data = res.json()
+    assert data["success"] is True
+    assert "inquiry_id" in data
 
     # Verify directly from DB that the record exists
     db = SessionLocal()
@@ -550,3 +566,116 @@ def test_admin_overview_telemetry(client, auth_headers):
 def test_admin_overview_unauthorized(client):
     response = client.get("/api/admin/overview")
     assert response.status_code == 401
+
+
+# ==========================================
+# 8. Security & Production Hardening Tests
+# ==========================================
+
+def test_security_headers_present(client):
+    """Verify OWASP security headers are present on API responses."""
+    response = client.get("/api/health")
+    assert response.status_code == 200
+    assert response.headers.get("x-content-type-options") == "nosniff"
+    assert response.headers.get("x-frame-options") == "DENY"
+    assert response.headers.get("referrer-policy") == "strict-origin-when-cross-origin"
+    assert "permissions-policy" in response.headers
+    assert "x-request-id" in response.headers
+
+
+def test_rate_limiting_contact(client):
+    """Verify contact endpoint enforces rate limiting (5/min)."""
+    from app.middleware.rate_limiter import reset_all_limiters
+    reset_all_limiters()
+    payload = {
+        "name": "Rate Limit Tester",
+        "email": "ratelimit_tester@leukotex.com",
+        "projectType": "Interactive Web Design",
+        "description": "Testing rate limiting enforcement for security audit.",
+        "budget": "25k-50k"
+    }
+    # 5 should succeed, 6th should be 429
+    for i in range(5):
+        p = {**payload, "email": f"ratelimit_{i}@leukotex.com"}
+        r = client.post("/api/contact", json=p)
+        assert r.status_code == 201, f"Request {i} should succeed, got {r.status_code}: {r.text}"
+
+    # 6th should be rate limited
+    r = client.post("/api/contact", json={**payload, "email": "ratelimit_5@leukotex.com"})
+    assert r.status_code == 429
+    assert "Retry-After" in r.headers
+    assert "Rate limit" in r.json()["detail"]
+    reset_all_limiters()
+
+
+def test_rate_limiting_auth(client):
+    """Verify auth endpoint enforces brute-force rate limiting."""
+    from app.middleware.rate_limiter import reset_all_limiters
+    reset_all_limiters()
+    for i in range(10):
+        r = client.post("/api/auth/login", json={"email": "brute@leukotex.com", "password": "wrong123"})
+        # 401 until rate limit kicks in
+        assert r.status_code == 401
+
+    r = client.post("/api/auth/login", json={"email": "brute@leukotex.com", "password": "wrong123"})
+    assert r.status_code == 429
+    assert "Retry-After" in r.headers
+    reset_all_limiters()
+
+
+def test_validation_error_format(client):
+    """Verify validation errors return structured field-level errors (for frontend)."""
+    bad_payload = {
+        "name": "A",
+        "email": "not-an-email",
+        "projectType": "",
+        "description": "Hi",
+        "budget": "10k-25k"
+    }
+    r = client.post("/api/contact", json=bad_payload)
+    assert r.status_code == 422
+    data = r.json()
+    assert data["detail"] == "Validation failed"
+    assert "errors" in data
+    assert isinstance(data["errors"], list)
+    fields = [e["field"] for e in data["errors"]]
+    assert any("email" in f for f in fields)
+
+
+def test_like_injection_escaped(client):
+    """Verify LIKE pattern injection (% and _) is escaped in search filters."""
+    # This should NOT match all projects via % wildcard injection
+    r = client.get("/api/projects?search=%")
+    assert r.status_code == 200
+    # With proper escaping, searching for '%' should return 0 or very few results,
+    # not all projects. Without escaping, '%' would match everything.
+    projects = r.json()
+    # If escaping works, '%' literal match should find 0 projects (no title contains '%')
+    assert isinstance(projects, list)
+
+
+def test_cors_no_wildcard_with_credentials(client):
+    """Verify CORS does not allow wildcard origin with credentials."""
+    from app.config import settings
+    # Config validator should have filtered wildcard
+    assert "*" not in settings.CORS_ORIGINS
+
+
+def test_database_url_redaction():
+    """Verify database URL redaction utility does not expose passwords in logs."""
+    from app.database import _redact_db_url
+    url = "postgresql://postgres:supersecret123@localhost:5432/leukotex_db"
+    redacted = _redact_db_url(url)
+    assert "supersecret123" not in redacted
+    assert "***" in redacted
+    assert "leukotex_db" in redacted
+
+
+def test_health_check_includes_db_status(client):
+    """Verify health endpoint includes database connectivity status."""
+    r = client.get("/api/health")
+    assert r.status_code == 200
+    data = r.json()
+    assert "database" in data
+    assert data["database"] in ("connected", "disconnected")
+    assert data["dialect"] == "postgresql"

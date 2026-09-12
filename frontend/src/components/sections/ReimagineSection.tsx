@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export const ReimagineSection: React.FC = () => {
   return (
-    <section id="reimagine" className="relative w-full min-h-screen bg-[#F5F5DC] flex flex-col items-center justify-center py-24 overflow-hidden">
+    <section id="reimagine" className="relative w-full min-h-screen bg-[#2a0a3a] flex flex-col items-center justify-center py-24 overflow-hidden">
       
       {/* Background Neon Squiggle */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-50">
@@ -24,7 +24,7 @@ export const ReimagineSection: React.FC = () => {
 
       {/* Phone Mockup Container */}
       <div className="relative z-10 w-64 h-[500px] md:w-80 md:h-[600px] bg-gray-900 rounded-[3rem] p-3 shadow-2xl border-4 border-gray-800">
-        <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-[#F5F5DC]">
+        <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-[#2a0a3a]">
           {/* Photo Image */}
           <img 
             src="https://picsum.photos/seed/oodles-people/900/1600" 
@@ -47,14 +47,14 @@ export const ReimagineSection: React.FC = () => {
             />
           </motion.div>
 
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 glass-pill text-[#3E2723] text-sm font-semibold">
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 glass-pill text-[#99FF99] text-sm font-semibold">
             reimagine
           </div>
         </div>
       </div>
 
       {/* Heading */}
-      <h2 className="relative z-10 font-display text-5xl md:text-7xl text-[#3E2723] mt-16 drop-shadow-[0_0_15px_rgba(255,138,212,0.5)]">
+      <h2 className="relative z-10 font-display text-5xl md:text-7xl text-[#99FF99] mt-16 drop-shadow-[0_0_15px_rgba(255,138,212,0.5)]">
         artistic intelligence
       </h2>
       

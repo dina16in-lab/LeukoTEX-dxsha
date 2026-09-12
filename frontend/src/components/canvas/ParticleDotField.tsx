@@ -1,46 +1,40 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * LEUKOTEX — Premium Interactive Dot Field Background
+ * LEUKOTEX — Buttery Interactive Dot Field (perf-tuned)
  *
- * Canvas2D particle system: ~800 subtle dark-brown dots across the viewport.
- * Cursor interaction: dots within a radius gently repel from the pointer and
- * smoothly spring back to their original positions.
- *
- * Performance: single <canvas>, requestAnimationFrame loop, zero React state
- * on mouse move, refs-only tracking, GPU-composited fixed layer.
- *
- * Accessibility: disabled on touch/coarse-pointer devices and respects
- * prefers-reduced-motion.
+ * Same look, a fraction of the cost:
+ * - Adaptive density: caps total dots (~1100 desktop) instead of ~2600.
+ * - Sleeps when idle: static dots render once, rAF stops until the
+ *   pointer moves / resize happens. No 60fps redraw for a still image.
+ * - DPR capped at 1.5, resize debounced, zero React state on mousemove,
+ *   no per-frame layout reads, pauses when tab hidden.
+ * - Disabled on touch / coarse pointers and static on reduced-motion.
  */
 
 // --- Config ---
-const DOT_SPACING = 28; // px between dots in the grid
-const DOT_BASE_RADIUS = 1.8; // base dot size (px)
-const DOT_RADIUS_VARIATION = 0.6; // ± random size variation
-const DOT_BASE_OPACITY = 0.45;
-const DOT_OPACITY_VARIATION = 0.15; // ± random opacity variation
+const DOT_SPACING = 36;
+const DOT_BASE_RADIUS = 2.5;
+const DOT_RADIUS_VARIATION = 0.55;
+const DOT_BASE_OPACITY = 0.85;
+const DOT_OPACITY_VARIATION = 0.15;
 
-const CURSOR_RADIUS = 120; // interaction radius around cursor
-const CURSOR_FORCE = 38; // max displacement force (px)
+const CURSOR_RADIUS = 130;
+const CURSOR_FORCE = 34;
 
-const SPRING_STIFFNESS = 0.08; // how quickly dots return (0–1, higher = faster)
-const SPRING_DAMPING = 0.82; // velocity damping (0–1, higher = more damping)
+const SPRING_STIFFNESS = 0.085;
+const SPRING_DAMPING = 0.82;
+const MAX_DOTS = 1200;
 
-// Dark brown palette
-const DOT_COLORS = ['#3A2418', '#4A3022', '#2B1A12'];
+const DOT_COLORS = ['#39FF14', '#99FF99', '#00FF00'];
 
 interface Dot {
-  /** Grid home position */
   homeX: number;
   homeY: number;
-  /** Current rendered position */
   x: number;
   y: number;
-  /** Velocity for spring physics */
   vx: number;
   vy: number;
-  /** Visual properties (set once) */
   radius: number;
   color: string;
   opacity: number;
@@ -49,16 +43,15 @@ interface Dot {
 export const ParticleDotField: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafId = useRef(0);
+  const running = useRef(false);
   const mouse = useRef({ x: -9999, y: -9999 });
   const dots = useRef<Dot[]>([]);
   const dpr = useRef(1);
   const canvasSize = useRef({ w: 0, h: 0 });
   const isReducedMotion = useRef(false);
-  const isSupported = useRef(true);
-  const scrollY = useRef(0);
+  const needsWake = useRef(true);
 
   useEffect(() => {
-    // --- Device / preference checks ---
     if (typeof window === 'undefined') return;
 
     const coarse =
@@ -68,189 +61,208 @@ export const ParticleDotField: React.FC = () => {
       'ontouchstart' in window;
 
     if (coarse) {
-      isSupported.current = false;
-      // Hide the canvas element on touch devices
-      if (canvasRef.current) {
-        canvasRef.current.style.display = 'none';
-      }
+      if (canvasRef.current) canvasRef.current.style.display = 'none';
       return;
     }
 
-    isReducedMotion.current = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches;
+    isReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    // --- Dot generation ---
     const generateDots = () => {
-      const w = canvasSize.current.w;
-      const h = canvasSize.current.h;
-      const newDots: Dot[] = [];
-      const cols = Math.ceil(w / DOT_SPACING) + 1;
-      const rows = Math.ceil(h / DOT_SPACING) + 1;
+      const { w, h } = canvasSize.current;
+      // Grow spacing on huge viewports so dot count stays bounded
+      const area = w * h;
+      const spacing =
+        area > 2_500_000 ? DOT_SPACING * 1.35 : area > 1_500_000 ? DOT_SPACING * 1.15 : DOT_SPACING;
+      const cols = Math.ceil(w / spacing) + 1;
+      const rows = Math.ceil(h / spacing) + 1;
+      const total = cols * rows;
+      const stride = total > MAX_DOTS ? Math.ceil(total / MAX_DOTS) : 1;
 
+      const next: Dot[] = [];
+      let i = 0;
       for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-          // Staggered grid: offset every other row by half spacing
-          const offsetX = row % 2 === 0 ? 0 : DOT_SPACING * 0.5;
-          const homeX = col * DOT_SPACING + offsetX;
-          const homeY = row * DOT_SPACING;
-
-          // Organic variation: slight random jitter in position
-          const jitterX = (Math.random() - 0.5) * 6;
-          const jitterY = (Math.random() - 0.5) * 6;
-
-          const radius =
-            DOT_BASE_RADIUS +
-            (Math.random() - 0.5) * 2 * DOT_RADIUS_VARIATION;
-          const opacity =
-            DOT_BASE_OPACITY +
-            (Math.random() - 0.5) * 2 * DOT_OPACITY_VARIATION;
-          const color =
-            DOT_COLORS[Math.floor(Math.random() * DOT_COLORS.length)];
-
-          newDots.push({
-            homeX: homeX + jitterX,
-            homeY: homeY + jitterY,
-            x: homeX + jitterX,
-            y: homeY + jitterY,
+        for (let col = 0; col < cols; col++, i++) {
+          if (stride > 1 && i % stride !== 0) continue;
+          const offsetX = row % 2 === 0 ? 0 : spacing * 0.5;
+          const homeX = col * spacing + offsetX + (Math.random() - 0.5) * 6;
+          const homeY = row * spacing + (Math.random() - 0.5) * 6;
+          const radius = Math.max(
+            0.5,
+            DOT_BASE_RADIUS + (Math.random() - 0.5) * 2 * DOT_RADIUS_VARIATION,
+          );
+          const opacity = Math.max(
+            0.25,
+            Math.min(0.6, DOT_BASE_OPACITY + (Math.random() - 0.5) * 2 * DOT_OPACITY_VARIATION),
+          );
+          next.push({
+            homeX,
+            homeY,
+            x: homeX,
+            y: homeY,
             vx: 0,
             vy: 0,
-            radius: Math.max(0.5, radius),
-            color,
-            opacity: Math.max(0.25, Math.min(0.6, opacity)),
+            radius,
+            color: DOT_COLORS[(Math.random() * DOT_COLORS.length) | 0],
+            opacity,
           });
         }
       }
-
-      dots.current = newDots;
+      dots.current = next;
     };
 
-    // --- Resize handler ---
-    const handleResize = () => {
-      dpr.current = Math.min(window.devicePixelRatio || 1, 2); // cap at 2x for perf
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      canvasSize.current = { w, h };
-      canvas.width = w * dpr.current;
-      canvas.height = h * dpr.current;
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
-      ctx.setTransform(dpr.current, 0, 0, dpr.current, 0, 0);
-      generateDots();
-    };
-
-    handleResize();
-
-    // --- Mouse tracking (passive, no React state) ---
-    const onMouseMove = (e: MouseEvent) => {
-      mouse.current.x = e.clientX;
-      mouse.current.y = e.clientY;
-    };
-
-    const onMouseLeave = () => {
-      mouse.current.x = -9999;
-      mouse.current.y = -9999;
-    };
-
-    const onScroll = () => {
-      scrollY.current = window.scrollY;
-    };
-
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
-    document.addEventListener('mouseleave', onMouseLeave);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', handleResize);
-
-    // Initial scroll
-    scrollY.current = window.scrollY;
-
-    // --- Animation loop ---
-    const cursorRadiusSq = CURSOR_RADIUS * CURSOR_RADIUS;
-
-    const animate = () => {
-      const w = canvasSize.current.w;
-      const h = canvasSize.current.h;
-
+    const paint = () => {
+      const { w, h } = canvasSize.current;
       ctx.clearRect(0, 0, w, h);
-
-      const mx = mouse.current.x;
-      const my = mouse.current.y;
-      const reduced = isReducedMotion.current;
-
-      for (let i = 0, len = dots.current.length; i < len; i++) {
-        const dot = dots.current[i];
-
-        if (!reduced) {
-          // Calculate distance from cursor to dot home position
-          // (home position stays fixed relative to canvas/viewport)
-          const dx = dot.homeX - mx;
-          const dy = dot.homeY - my;
-          const distSq = dx * dx + dy * dy;
-
-          if (distSq < cursorRadiusSq && distSq > 0.01) {
-            const dist = Math.sqrt(distSq);
-            // Force falls off smoothly with distance
-            const force =
-              ((CURSOR_RADIUS - dist) / CURSOR_RADIUS) * CURSOR_FORCE;
-            // Normalize direction and apply force
-            const nx = dx / dist;
-            const ny = dy / dist;
-            dot.vx += nx * force * 0.06;
-            dot.vy += ny * force * 0.06;
-          }
-
-          // Spring back to home + damping
-          const springX = (dot.homeX - dot.x) * SPRING_STIFFNESS;
-          const springY = (dot.homeY - dot.y) * SPRING_STIFFNESS;
-          dot.vx = (dot.vx + springX) * SPRING_DAMPING;
-          dot.vy = (dot.vy + springY) * SPRING_DAMPING;
-          dot.x += dot.vx;
-          dot.y += dot.vy;
-
-          // Snap when very close to avoid micro-jitter
-          if (
-            Math.abs(dot.x - dot.homeX) < 0.05 &&
-            Math.abs(dot.y - dot.homeY) < 0.05 &&
-            Math.abs(dot.vx) < 0.01 &&
-            Math.abs(dot.vy) < 0.01
-          ) {
-            dot.x = dot.homeX;
-            dot.y = dot.homeY;
-            dot.vx = 0;
-            dot.vy = 0;
-          }
-        } else {
-          // Reduced motion: dots stay at home, no animation
-          dot.x = dot.homeX;
-          dot.y = dot.homeY;
-        }
-
-        // Draw dot
+      const list = dots.current;
+      for (let k = 0, len = list.length; k < len; k++) {
+        const dot = list[k];
         ctx.beginPath();
-        ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
+        ctx.arc(dot.x, dot.y, dot.radius, 0, 6.2832);
         ctx.fillStyle = dot.color;
         ctx.globalAlpha = dot.opacity;
         ctx.fill();
       }
-
       ctx.globalAlpha = 1;
-      rafId.current = requestAnimationFrame(animate);
     };
 
-    rafId.current = requestAnimationFrame(animate);
+    const cursorRadiusSq = CURSOR_RADIUS * CURSOR_RADIUS;
 
-    // --- Cleanup ---
+    const step = (): boolean => {
+      // Returns true while anything is still moving
+      let active = false;
+      const mx = mouse.current.x;
+      const my = mouse.current.y;
+      const list = dots.current;
+      const mouseLive = mx > -1000;
+
+      for (let k = 0, len = list.length; k < len; k++) {
+        const dot = list[k];
+        if (mouseLive) {
+          const dx = dot.homeX - mx;
+          const dy = dot.homeY - my;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < cursorRadiusSq && distSq > 0.01) {
+            const dist = Math.sqrt(distSq);
+            const force = ((CURSOR_RADIUS - dist) / CURSOR_RADIUS) * CURSOR_FORCE;
+            dot.vx += (dx / dist) * force * 0.06;
+            dot.vy += (dy / dist) * force * 0.06;
+          }
+        }
+        const springX = (dot.homeX - dot.x) * SPRING_STIFFNESS;
+        const springY = (dot.homeY - dot.y) * SPRING_STIFFNESS;
+        dot.vx = (dot.vx + springX) * SPRING_DAMPING;
+        dot.vy = (dot.vy + springY) * SPRING_DAMPING;
+        dot.x += dot.vx;
+        dot.y += dot.vy;
+
+        if (
+          Math.abs(dot.x - dot.homeX) < 0.05 &&
+          Math.abs(dot.y - dot.homeY) < 0.05 &&
+          Math.abs(dot.vx) < 0.01 &&
+          Math.abs(dot.vy) < 0.01
+        ) {
+          dot.x = dot.homeX;
+          dot.y = dot.homeY;
+          dot.vx = 0;
+          dot.vy = 0;
+        } else {
+          active = true;
+        }
+      }
+      return active || mouseLive;
+    };
+
+    const loop = () => {
+      if (isReducedMotion.current) {
+        // Static render, no physics
+        for (const dot of dots.current) {
+          dot.x = dot.homeX;
+          dot.y = dot.homeY;
+        }
+        paint();
+        running.current = false;
+        return;
+      }
+      const stillActive = step();
+      paint();
+      if (stillActive || needsWake.current) {
+        needsWake.current = false;
+        rafId.current = requestAnimationFrame(loop);
+      } else {
+        running.current = false;
+      }
+    };
+
+    const wake = () => {
+      needsWake.current = true;
+      if (!running.current) {
+        running.current = true;
+        cancelAnimationFrame(rafId.current);
+        rafId.current = requestAnimationFrame(loop);
+      }
+    };
+
+    const handleResize = () => {
+      dpr.current = Math.min(window.devicePixelRatio || 1, 1.5);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      canvasSize.current = { w, h };
+      canvas.width = Math.round(w * dpr.current);
+      canvas.height = Math.round(h * dpr.current);
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr.current, 0, 0, dpr.current, 0, 0);
+      generateDots();
+      paint();
+      wake();
+    };
+
+    let resizeTimer = 0;
+    const onResize = () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(handleResize, 150);
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouse.current.x = e.clientX;
+      mouse.current.y = e.clientY;
+      wake();
+    };
+    const onMouseLeave = () => {
+      mouse.current.x = -9999;
+      mouse.current.y = -9999;
+      wake();
+    };
+    const onVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId.current);
+        running.current = false;
+      } else {
+        paint();
+        wake();
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    document.documentElement.addEventListener('mouseleave', onMouseLeave);
+    window.addEventListener('resize', onResize);
+    document.addEventListener('visibilitychange', onVisibility);
+
     return () => {
       cancelAnimationFrame(rafId.current);
+      running.current = false;
+      window.clearTimeout(resizeTimer);
       window.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseleave', onMouseLeave);
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', handleResize);
+      document.documentElement.removeEventListener('mouseleave', onMouseLeave);
+      window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
 

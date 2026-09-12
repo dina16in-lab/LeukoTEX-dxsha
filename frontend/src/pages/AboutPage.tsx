@@ -18,13 +18,13 @@ export const AboutPage: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="relative z-10 max-w-4xl"
         >
-          <span className="font-label-caps text-label-caps text-[#3E2723] uppercase tracking-widest block mb-6">
+          <span className="font-label-caps text-label-caps text-[#99FF99] uppercase tracking-widest block mb-6">
             About LEUKOTEX
           </span>
-          <h1 className="font-headline-display text-4xl sm:text-5xl md:text-6xl lg:text-[76px] text-[#3E2723] uppercase font-semibold leading-tight mb-6">
+          <h1 className="font-headline-display text-4xl sm:text-5xl md:text-6xl lg:text-[76px] text-[#99FF99] uppercase font-semibold leading-tight mb-6">
             Turning ideas into digital experiences.
           </h1>
-          <p className="font-body-md text-base sm:text-lg text-[#3E2723] max-w-2xl leading-relaxed">
+          <p className="font-body-md text-base sm:text-lg text-[#99FF99] max-w-2xl leading-relaxed">
             LEUKOTEX is a creative web studio focused on building modern websites, thoughtful UI/UX, product experiences, and immersive 3D websites. We combine design and development to turn ideas into websites that look great, work smoothly, and fit the people they're built for.
           </p>
         </motion.div>
@@ -40,17 +40,17 @@ export const AboutPage: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col gap-6 order-2 lg:order-1"
         >
-          <span className="font-label-mono text-label-mono text-[#3E2723] uppercase flex items-center gap-2 tracking-widest">
+          <span className="font-label-mono text-label-mono text-[#99FF99] uppercase flex items-center gap-2 tracking-widest">
             <span className="w-4 h-[1px] bg-primary block" />
             THE STORY
           </span>
-          <h2 className="font-headline-lg text-3xl sm:text-4xl text-[#3E2723] font-medium">
+          <h2 className="font-headline-lg text-3xl sm:text-4xl text-[#99FF99] font-medium">
             Built to turn ideas into possibilities.
           </h2>
-          <p className="font-body-md text-[#3E2723] text-base sm:text-lg leading-relaxed">
+          <p className="font-body-md text-[#99FF99] text-base sm:text-lg leading-relaxed">
             LEUKOTEX was started on 26 August 2026 with a simple goal: help individuals, businesses, startups, and students turn their ideas into useful and engaging digital experiences.
           </p>
-          <p className="font-body-md text-[#3E2723] text-base leading-relaxed">
+          <p className="font-body-md text-[#99FF99] text-base leading-relaxed">
             We work across website development, UI/UX design, product websites, interactive experiences, and 3D websites. We focus on understanding the requirement first, designing the right experience, and then building it into a responsive and functional website.
           </p>
         </motion.div>
@@ -73,10 +73,10 @@ export const AboutPage: React.FC = () => {
             {/* Scrim */}
             <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-80 pointer-events-none" />
             <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <span className="font-label-mono text-label-mono text-[#3E2723] uppercase tracking-widest bg-background/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+              <span className="font-label-mono text-label-mono text-[#99FF99] uppercase tracking-widest bg-background/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
                 LEUKOTEX CREATIVE DEVELOPMENT
               </span>
-              <span className="material-symbols-outlined text-[#3E2723] text-[20px]">arrow_outward</span>
+              <span className="material-symbols-outlined text-[#99FF99] text-[20px]">arrow_outward</span>
             </div>
           </TiltCard>
         </motion.div>

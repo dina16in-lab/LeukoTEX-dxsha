@@ -10,11 +10,16 @@ from app.models.user import User
 router = APIRouter(tags=["Projects"])
 
 
+def _escape_like(value: str) -> str:
+    """Escape LIKE wildcards to prevent pattern injection."""
+    return value.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+
+
 @router.get("/projects", response_model=List[ProjectResponse])
 def get_projects(
-    category: Optional[str] = Query(None, description="Filter by category or category slug"),
+    category: Optional[str] = Query(None, description="Filter by category or category slug", max_length=100),
     featured: Optional[bool] = Query(None, description="Filter by featured status"),
-    search: Optional[str] = Query(None, description="Search across title, client, or description"),
+    search: Optional[str] = Query(None, description="Search across title, client, or description", max_length=100),
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=100),
     db: Session = Depends(get_db)
@@ -23,20 +28,22 @@ def get_projects(
     query = db.query(Project)
 
     if category and category.lower() != "all":
+        safe_cat = _escape_like(category)
         query = query.filter(
-            (Project.category.ilike(f"%{category}%")) |
-            (Project.category_slug.ilike(f"%{category}%"))
+            (Project.category.ilike(f"%{safe_cat}%", escape="\\")) |
+            (Project.category_slug.ilike(f"%{safe_cat}%", escape="\\"))
         )
 
     if featured is not None:
         query = query.filter(Project.featured == featured)
 
     if search:
-        search_term = f"%{search}%"
+        safe_search = _escape_like(search)
+        search_term = f"%{safe_search}%"
         query = query.filter(
-            (Project.title.ilike(search_term)) |
-            (Project.client.ilike(search_term)) |
-            (Project.description.ilike(search_term))
+            (Project.title.ilike(search_term, escape="\\")) |
+            (Project.client.ilike(search_term, escape="\\")) |
+            (Project.description.ilike(search_term, escape="\\"))
         )
 
     projects = query.order_by(Project.created_at.desc()).offset(skip).limit(limit).all()

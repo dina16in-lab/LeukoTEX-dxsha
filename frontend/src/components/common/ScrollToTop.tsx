@@ -1,27 +1,34 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useLenis } from 'lenis/react';
+import { scrollToTopInstant } from '../../lib/smooth';
 
 /**
- * Scrolls to top on route change, or to a hash anchor if present.
+ * Lenis-aware scroll restoration.
+ * - Route change → instant jump to top through Lenis (no flash, no fight).
+ * - Hash anchor → buttery Lenis scrollTo with header offset.
  */
 export const ScrollToTop: React.FC = () => {
   const { pathname, hash } = useLocation();
+  const lenis = useLenis();
 
   useEffect(() => {
     if (hash) {
-      // Scroll to anchor element after a brief delay for render
-      const timer = setTimeout(() => {
-        const element = document.getElementById(hash.slice(1));
-        if (element) {
+      const id = hash.slice(1);
+      const timer = window.setTimeout(() => {
+        const element = document.getElementById(id);
+        if (!element) return;
+        if (lenis) {
+          lenis.scrollTo(element, { offset: -88, duration: 1.4 });
+        } else {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 100);
-      return () => clearTimeout(timer);
+      }, 60);
+      return () => window.clearTimeout(timer);
     }
 
-    // Scroll to top on route change
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-  }, [pathname, hash]);
+    scrollToTopInstant(lenis ?? null);
+  }, [pathname, hash, lenis]);
 
   return null;
 };

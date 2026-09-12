@@ -16,16 +16,16 @@ export const SelectedWorkSection: React.FC<SelectedWorkSectionProps> = ({ projec
       {/* Header */}
       <div className="flex justify-between items-end">
         <div className="flex flex-col gap-2">
-          <span className="font-label-mono text-label-mono text-[#3E2723] uppercase tracking-widest">
+          <span className="font-label-mono text-label-mono text-[#99FF99] uppercase tracking-widest">
             02 // Selected Work
           </span>
-          <h3 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-[#3E2723]">
+          <h3 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-[#99FF99]">
             Case Studies
           </h3>
         </div>
         <a
           href="#work"
-          className="hidden md:flex text-[#3E2723] font-label-caps text-label-caps uppercase hover:text-[#3E2723] transition-colors items-center gap-2 group"
+          className="hidden md:flex text-[#99FF99] font-label-caps text-label-caps uppercase hover:text-[#99FF99] transition-colors items-center gap-2 group"
         >
           <span>View All Work</span>
           <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
@@ -64,21 +64,21 @@ export const SelectedWorkSection: React.FC<SelectedWorkSectionProps> = ({ projec
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2.5 py-1 rounded-sm bg-surface-variant/80 backdrop-blur-md text-[#3E2723] font-label-mono text-[10px] uppercase tracking-wider"
+                        className="px-2.5 py-1 rounded-sm bg-surface-variant/80 backdrop-blur-md text-[#99FF99] font-label-mono text-[10px] uppercase tracking-wider"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
 
-                  <h4 className="font-headline-lg-mobile text-2xl md:text-3xl text-[#3E2723] font-semibold tracking-tight">
+                  <h4 className="font-headline-lg-mobile text-2xl md:text-3xl text-[#99FF99] font-semibold tracking-tight">
                     {project.title}
                   </h4>
-                  <p className="font-body-md text-sm text-[#3E2723] opacity-80 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">
+                  <p className="font-body-md text-sm text-[#99FF99] opacity-80 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">
                     {project.description}
                   </p>
 
-                  <div className="pt-2 flex items-center gap-2 text-[#3E2723] text-xs font-label-mono uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="pt-2 flex items-center gap-2 text-[#99FF99] text-xs font-label-mono uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <span>Explore Case Study</span>
                     <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
                   </div>
@@ -93,7 +93,7 @@ export const SelectedWorkSection: React.FC<SelectedWorkSectionProps> = ({ projec
       <div className="md:hidden w-full">
         <a
           href="#work"
-          className="w-full block text-center border border-border-metallic text-[#3E2723] px-8 py-4 rounded-full font-label-caps text-label-caps uppercase hover:bg-surface-container-high transition-all bg-background/50 backdrop-blur-sm"
+          className="w-full block text-center border border-border-metallic text-[#99FF99] px-8 py-4 rounded-full font-label-caps text-label-caps uppercase hover:bg-surface-container-high transition-all bg-background/50 backdrop-blur-sm"
         >
           View All Projects
         </a>

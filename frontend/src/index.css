@@ -6,20 +6,91 @@
   :root {
     color-scheme: dark;
     --glow-accent: rgba(126, 198, 255, 0.15); /* neon-blue glow */
+    --butter-ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   html {
-    background-color: #F5F5DC;
-    scroll-behavior: smooth;
+    background-color: #2a0a3a;
+    /* Lenis owns smoothing — native smooth fights it and causes double-ease jank */
+    scroll-behavior: auto;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Lenis-recommended base — seamless, no rubber-band chaining */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
   }
 
   body {
-    background-color: #F5F5DC;
-    color: #3E2723;
-    overflow-x: hidden;
-    overscroll-behavior: none;
+    background-color: #2a0a3a;
+    color: #99FF99;
+    overflow-x: clip;
+    overscroll-behavior-y: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-synthesis: none;
+    /* Buttery text + layout stability during Lenis transforms */
+    hanging-punctuation: first allow-end;
+  }
+
+  /* Anchor offset so Lenis anchors + native fallback land below fixed header */
+  section[id],
+  div[id] {
+    scroll-margin-top: 88px;
+  }
+
+  /* Slim, seamless scrollbar that never causes layout shift */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(153, 255, 153, 0.35) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(153, 255, 153, 0.28);
+    border-radius: 999px;
+    border: 3px solid #2a0a3a;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(153, 255, 153, 0.5);
+    background-clip: padding-box;
+    border: 3px solid #2a0a3a;
+  }
+
+  ::selection {
+    background: rgba(153, 255, 153, 0.9);
+    color: #2a0a3a;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  img, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  img {
+    /* Prevent layout jank from late image decode during scroll */
+    content-visibility: auto;
+    filter: sepia(1) hue-rotate(90deg) saturate(3) brightness(0.9) contrast(1.2);
   }
 
   .pb-safe {
@@ -35,6 +106,20 @@
   .nav-blur {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Offscreen sections skip layout/paint until near viewport — huge scroll win */
+  .reveal-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 700px;
+  }
+
+  /* GPU-only transform helper for buttery parallax / reveals */
+  .transform-gpu-smooth {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
   }
 
   .glass-panel {
@@ -97,8 +182,8 @@
 
 /* LEUKOTEX Minimal Premium Cursor — performance-first, no blur/particles */
 :root {
-  --cursor-accent: #3E2723;
-  --cursor-accent-soft: rgba(62, 39, 35, 0.13);
+  --cursor-accent: #99FF99;
+  --cursor-accent-soft: rgba(153, 255, 153, 0.13);
   --cursor-pink: #E8A0BF; /* subtle LEUKOTEX lilac-pink (from logo #C9A0DC→#FF9E9E) */
   --cursor-pink-hover: rgba(232, 160, 191, 0.42);
 }
@@ -126,6 +211,7 @@
   body, a, button, [role="button"], .cursor-pointer {
     cursor: auto !important;
   }
+  .custom-cursor-layer,
   .custom-cursor-dot-wrap,
   .custom-cursor-ring-wrap {
     display: none !important;
@@ -162,7 +248,27 @@
 /* Interactive Dot Field Background — never block interaction */
 .particle-dot-field {
   pointer-events: none;
-  will-change: contents;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Buttery custom cursor — GPU layer, never intercepts input */
+.custom-cursor-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+.custom-cursor-dot-el,
+.custom-cursor-ring-el,
+.custom-cursor-trail-el {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+  transform: translate3d(-100px, -100px, 0);
+  backface-visibility: hidden;
 }
 
 /* Touch / mobile / tablet — hide dot field entirely */
@@ -189,7 +295,7 @@ button:focus-visible,
 [role="button"]:focus-visible,
 select:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid #3E2723;
+  outline: 2px solid #99FF99;
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -198,7 +304,7 @@ select:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
   outline: none;
-  border-bottom-color: #3E2723 !important;
-  box-shadow: 0 2px 0 0 #3E2723;
+  border-bottom-color: #99FF99 !important;
+  box-shadow: 0 2px 0 0 #99FF99;
 }
 

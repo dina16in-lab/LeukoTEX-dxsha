@@ -9,13 +9,13 @@ export const TimelineSection: React.FC = () => {
     <section className="w-full bg-surface-container-low/70 backdrop-blur-md py-section-gap px-margin-mobile md:px-margin-desktop relative overflow-hidden border-y border-border-metallic/40">
       <div className="max-w-4xl mx-auto flex flex-col gap-16 relative z-10">
         <div className="text-center flex flex-col gap-3">
-          <span className="font-label-caps text-label-caps text-[#3E2723] uppercase tracking-widest block">
+          <span className="font-label-caps text-label-caps text-[#99FF99] uppercase tracking-widest block">
             OUR PROCESS
           </span>
-          <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-[#3E2723]">
+          <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-[#99FF99]">
             From Idea to Launch.
           </h2>
-          <p className="font-body-md text-[#3E2723] max-w-lg mx-auto text-sm sm:text-base">
+          <p className="font-body-md text-[#99FF99] max-w-lg mx-auto text-sm sm:text-base">
             We understand the idea, shape the experience, design the interface, and build the final website with the right balance of design, usability, and technology.
           </p>
         </div>
@@ -43,19 +43,19 @@ export const TimelineSection: React.FC = () => {
                   }`}
                 />
 
-                <span className="font-label-mono text-label-mono text-[#3E2723] uppercase mb-2 block tracking-wider">
+                <span className="font-label-mono text-label-mono text-[#99FF99] uppercase mb-2 block tracking-wider">
                   {item.phase}
                 </span>
 
                 <h3
                   className={`font-headline-lg-mobile text-2xl md:text-3xl mb-3 transition-colors duration-400 ${
-                    isActive ? 'text-[#3E2723]' : 'text-[#3E2723] group-hover:text-[#3E2723]-fixed'
+                    isActive ? 'text-[#99FF99]' : 'text-[#99FF99] group-hover:text-[#99FF99]-fixed'
                   }`}
                 >
                   {item.title}
                 </h3>
 
-                <p className="font-body-md text-[#3E2723] max-w-xl leading-relaxed text-sm sm:text-base">
+                <p className="font-body-md text-[#99FF99] max-w-xl leading-relaxed text-sm sm:text-base">
                   {item.description}
                 </p>
               </motion.div>

@@ -1,24 +1,20 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useLenis } from 'lenis/react';
+import { scrollToSection } from '../../lib/smooth';
 
 export const MobileNav: React.FC = () => {
   const location = useLocation();
+  const lenis = useLenis();
   const isHomePage = location.pathname === '/';
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const scrollToSectionId = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: 'smooth'
-      });
-    }
+    scrollToSection(lenis ?? null, id, -80);
   };
 
   const tabs = [
     { name: 'Home', id: 'home', icon: 'home', path: '/' },
-    { name: 'Work', id: 'work', icon: 'work', path: '/work' },
     { name: 'Services', id: 'services', icon: 'layers', path: '/#services' },
     { name: 'Contact', id: 'contact', icon: 'mail', path: '/#contact' },
   ];
@@ -32,14 +28,14 @@ export const MobileNav: React.FC = () => {
         {tabs.map((tab) => {
           const isHashLink = tab.path.startsWith('/#');
 
-          // Hash links on home page → scroll, on other pages → navigate
+          // Hash links on home page → smooth Lenis scroll, on other pages → navigate
           if (isHashLink) {
             if (isHomePage) {
               return (
                 <a
                   key={tab.id}
                   href={`#${tab.id}`}
-                  onClick={(e) => scrollToSection(e, tab.id)}
+                  onClick={(e) => scrollToSectionId(e, tab.id)}
                   className="flex flex-col items-center gap-1 transition-all duration-300 py-1 px-3 rounded-lg relative text-white hover:text-white active:scale-95"
                   aria-label={tab.name}
                 >

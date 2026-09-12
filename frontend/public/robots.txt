@@ -1,0 +1,11 @@
+# LeukoTEX — Immersive Digital Studio
+# https://leukotex.vercel.app
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://leukotex.vercel.app/sitemap.xml
+
+# Disallow sensitive paths
+Disallow: /api/

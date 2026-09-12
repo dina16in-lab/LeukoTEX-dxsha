@@ -57,12 +57,7 @@ export const Footer: React.FC = () => {
                   <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-secondary group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
-              <li>
-                <Link to="/work" className="font-body-md text-white hover:text-white transition-colors inline-block relative group">
-                  Work
-                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-secondary group-hover:w-full transition-all duration-300"></span>
-                </Link>
-              </li>
+
               <li>
                 <Link to="/#contact" className="font-body-md text-white hover:text-white transition-colors inline-block relative group">
                   Contact
@@ -74,18 +69,22 @@ export const Footer: React.FC = () => {
           
           {/* Contact & Status */}
           <div className="md:col-span-3 md:col-start-10 flex flex-col gap-6">
-            <h3 className="font-label-mono text-label-mono uppercase tracking-widest text-white">Contact</h3>
-            <ul className="flex flex-col gap-4">
-              <li>
-                <a href="mailto:dina16in@gmail.com" className="font-body-md text-white hover:text-white transition-colors flex items-center gap-2 group">
-                  <span className="material-symbols-outlined text-[18px] text-white group-hover:text-white">mail</span>
-                  dina16in@gmail.com
+            <h3 className="font-label-mono text-label-mono uppercase tracking-widest text-white">Founders</h3>
+            <ul className="flex flex-col gap-5">
+              <li className="flex flex-col gap-1">
+                <span className="font-label-mono text-[10px] uppercase tracking-widest text-white/70">Founder</span>
+                <span className="font-body-md text-white">S Dinesh</span>
+                <a href="tel:6379323253" className="font-body-md text-white/80 hover:text-white transition-colors flex items-center gap-2 group text-sm">
+                  <span className="material-symbols-outlined text-[16px]">call</span>
+                  6379323253
                 </a>
               </li>
-              <li>
-                <a href="tel:6379323253" className="font-body-md text-white hover:text-white transition-colors flex items-center gap-2 group">
-                  <span className="material-symbols-outlined text-[18px] text-white group-hover:text-white">call</span>
-                  6379323253
+              <li className="flex flex-col gap-1">
+                <span className="font-label-mono text-[10px] uppercase tracking-widest text-white/70">Co-Founder</span>
+                <span className="font-body-md text-white">Amarwin Jasan</span>
+                <a href="tel:9994596987" className="font-body-md text-white/80 hover:text-white transition-colors flex items-center gap-2 group text-sm">
+                  <span className="material-symbols-outlined text-[16px]">call</span>
+                  9994596987
                 </a>
               </li>
             </ul>

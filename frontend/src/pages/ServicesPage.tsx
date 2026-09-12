@@ -22,13 +22,13 @@ export const ServicesPage: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col gap-6 max-w-2xl relative z-10"
         >
-          <span className="font-label-mono text-label-mono text-[#3E2723] uppercase tracking-widest">
+          <span className="font-label-mono text-label-mono text-[#99FF99] uppercase tracking-widest">
             WHAT WE OFFER
           </span>
-          <h1 className="font-headline-display text-5xl sm:text-6xl md:text-7xl lg:text-[84px] text-[#3E2723] uppercase tracking-tighter mix-blend-difference font-bold leading-none">
+          <h1 className="font-headline-display text-5xl sm:text-6xl md:text-7xl lg:text-[84px] text-[#99FF99] uppercase tracking-tighter mix-blend-difference font-bold leading-none">
             What We<br />Create
           </h1>
-          <p className="font-body-md text-base sm:text-lg text-[#3E2723] max-w-xl bg-background/50 backdrop-blur-md p-6 rounded-2xl border border-white/5 leading-relaxed">
+          <p className="font-body-md text-base sm:text-lg text-[#99FF99] max-w-xl bg-background/50 backdrop-blur-md p-6 rounded-2xl border border-white/5 leading-relaxed">
             LEUKOTEX creates modern websites, UI/UX experiences, product websites, and interactive 3D experiences for individuals, businesses, startups, and students. We combine design and development to turn ideas into useful, engaging digital experiences.
           </p>
         </motion.div>
@@ -55,17 +55,17 @@ export const ServicesPage: React.FC = () => {
                 {/* Text Content */}
                 <div className="flex-1 flex flex-col gap-6 order-2 md:order-1 z-10">
                   <div className="flex items-center gap-4">
-                    <span className="font-label-mono text-label-mono text-[#3E2723] uppercase tracking-widest">
+                    <span className="font-label-mono text-label-mono text-[#99FF99] uppercase tracking-widest">
                       {service.number}
                     </span>
                     <div className="h-[1px] w-12 bg-border-metallic group-hover:bg-primary transition-colors duration-500" />
                   </div>
 
-                  <h2 className="font-headline-lg text-3xl sm:text-4xl md:text-5xl text-[#3E2723] tracking-tight font-medium">
+                  <h2 className="font-headline-lg text-3xl sm:text-4xl md:text-5xl text-[#99FF99] tracking-tight font-medium">
                     {service.title}
                   </h2>
 
-                  <p className="font-body-md text-base sm:text-lg text-[#3E2723] group-hover:text-[#3E2723] transition-colors duration-500 leading-relaxed">
+                  <p className="font-body-md text-base sm:text-lg text-[#99FF99] group-hover:text-[#99FF99] transition-colors duration-500 leading-relaxed">
                     {service.fullDesc}
                   </p>
 
@@ -73,7 +73,7 @@ export const ServicesPage: React.FC = () => {
                     {service.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-4 py-1.5 rounded-full border border-border-metallic font-label-mono text-label-mono text-[#3E2723] group-hover:text-[#3E2723] group-hover:border-primary/50 uppercase bg-surface-muted/50 transition-colors duration-300"
+                        className="px-4 py-1.5 rounded-full border border-border-metallic font-label-mono text-label-mono text-[#99FF99] group-hover:text-[#99FF99] group-hover:border-primary/50 uppercase bg-surface-muted/50 transition-colors duration-300"
                       >
                         {tag}
                       </span>

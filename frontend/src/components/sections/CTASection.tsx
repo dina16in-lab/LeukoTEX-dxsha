@@ -25,15 +25,15 @@ export const CTASection: React.FC<CTASectionProps> = ({
         transition={{ duration: 0.8 }}
         className="relative z-10 flex flex-col items-center gap-6 max-w-3xl"
       >
-        <span className="font-label-mono text-label-mono text-[#3E2723] uppercase tracking-widest">
+        <span className="font-label-mono text-label-mono text-[#99FF99] uppercase tracking-widest">
           Initiate Sequence
         </span>
 
-        <h2 className="font-headline-lg text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#3E2723] uppercase tracking-tighter leading-tight whitespace-pre-line font-semibold">
+        <h2 className="font-headline-lg text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#99FF99] uppercase tracking-tighter leading-tight whitespace-pre-line font-semibold">
           {title}
         </h2>
 
-        <p className="font-body-md text-base sm:text-lg text-[#3E2723] max-w-xl">
+        <p className="font-body-md text-base sm:text-lg text-[#99FF99] max-w-xl">
           {subtitle}
         </p>
 

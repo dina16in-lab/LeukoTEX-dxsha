@@ -114,7 +114,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     # Log validation failures at INFO (client error, not server error)
     logger.info("Validation failed for %s %s: %s", request.method, request.url.path, errors)
     return JSONResponse(
-        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        status_code=status.HTTP_422_UNPROCESSABLE_CONTENT if hasattr(status, "HTTP_422_UNPROCESSABLE_CONTENT") else 422,
         content={
             "detail": "Validation failed",
             "errors": [

@@ -1,5 +1,5 @@
 from datetime import timedelta
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from app.database import get_db
@@ -14,16 +14,21 @@ from app.schemas.auth import (
 )
 from app.core.security import verify_password, get_password_hash, create_access_token
 from app.core.deps import get_current_user, get_current_admin
+from app.middleware.rate_limiter import auth_limiter, auth_strict_limiter, rate_limit
 
 router = APIRouter(tags=["Authentication & Users"])
 
 
 @router.post("/auth/login", response_model=Token)
 def login(
+    request: Request,
     login_data: LoginRequest,
     db: Session = Depends(get_db)
 ):
     """Authenticate user with JSON email and password."""
+    # Rate limiting: brute-force protection
+    rate_limit(request, auth_limiter)
+    rate_limit(request, auth_strict_limiter)
     user = db.query(User).filter(User.email == login_data.email.lower()).first()
     if not user or not verify_password(login_data.password, user.hashed_password):
         raise HTTPException(
@@ -55,10 +60,13 @@ def login(
 
 @router.post("/auth/token", response_model=Token, include_in_schema=False)
 def login_oauth2(
+    request: Request,
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db)
 ):
     """OAuth2 compatible token login for Swagger UI."""
+    rate_limit(request, auth_limiter)
+    rate_limit(request, auth_strict_limiter)
     user = db.query(User).filter(
         (User.email == form_data.username.lower()) | (User.username == form_data.username)
     ).first()

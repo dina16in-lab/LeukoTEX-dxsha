@@ -19,6 +19,19 @@ if not DATABASE_URL.startswith("postgresql://") and not DATABASE_URL.startswith(
         "LEUKOTEX strictly requires PostgreSQL (postgresql://...). SQLite fallback has been disabled."
     )
 
+def _redact_db_url(url: str) -> str:
+    """Redact password from DB URL for safe logging."""
+    try:
+        from urllib.parse import urlparse, urlunparse
+        parsed = urlparse(url)
+        if parsed.password:
+            netloc = parsed.netloc.replace(parsed.password, "***", 1)
+            return urlunparse(parsed._replace(netloc=netloc))
+        return url
+    except Exception:
+        return "***redacted***"
+
+
 try:
     engine = create_engine(
         DATABASE_URL,
@@ -29,11 +42,12 @@ try:
     )
     # Validate connection immediately
     with engine.connect() as conn:
-        logger.info("Successfully established connection to PostgreSQL 18 database.")
+        logger.info("Successfully established connection to PostgreSQL 18 database (%s).", engine.dialect.name)
 except Exception as e:
+    redacted = _redact_db_url(DATABASE_URL)
     logger.error(
-        f"CRITICAL: Failed to connect to PostgreSQL 18 database at '{DATABASE_URL}'. "
-        f"Error details: {e}. Fallback to SQLite is disabled."
+        "CRITICAL: Failed to connect to PostgreSQL 18 database at '%s'. Error: %s. Fallback to SQLite is disabled.",
+        redacted, e
     )
     raise RuntimeError(
         f"Failed to connect to PostgreSQL 18 database. Error: {e}. "

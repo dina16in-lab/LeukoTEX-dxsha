@@ -24,3 +24,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Local AI/development tooling
+.opencode/

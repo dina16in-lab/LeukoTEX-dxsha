@@ -96,7 +96,7 @@ export const ContactForm: React.FC = () => {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="relative z-10 flex flex-col gap-8 max-w-3xl w-full p-6 sm:p-10 md:p-12 rounded-2xl bg-white/30 border border-[#3E2723]/20 backdrop-blur-xl shadow-2xl"
+      className="relative z-10 flex flex-col gap-8 max-w-3xl w-full p-6 sm:p-10 md:p-12 rounded-2xl bg-white/30 border border-[#99FF99]/20 backdrop-blur-xl shadow-2xl"
     >
       {/* Name and Email Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -105,7 +105,7 @@ export const ContactForm: React.FC = () => {
           <label
             htmlFor="name"
             className={`font-label-caps text-label-caps uppercase tracking-widest absolute transition-all duration-300 pointer-events-none ${
-              formData.name ? '-top-4 text-[10px] text-[#3E2723]' : 'top-4 text-[#3E2723]'
+              formData.name ? '-top-4 text-[10px] text-[#99FF99]' : 'top-4 text-[#99FF99]'
             }`}
           >
             Name *
@@ -120,8 +120,8 @@ export const ContactForm: React.FC = () => {
               if (validationErrors.name) setValidationErrors({ ...validationErrors, name: '' });
             }}
             placeholder=" "
-            className={`peer w-full bg-transparent border-b py-4 text-[#3E2723] font-body-md focus:outline-none transition-colors focus:bg-white/10 ${
-              validationErrors.name ? 'border-error text-error' : 'border-[#3E2723]/30 focus:border-[#3E2723]'
+            className={`peer w-full bg-transparent border-b py-4 text-[#99FF99] font-body-md focus:outline-none transition-colors focus:bg-white/10 ${
+              validationErrors.name ? 'border-error text-error' : 'border-[#99FF99]/30 focus:border-[#99FF99]'
             }`}
             aria-invalid={!!validationErrors.name}
             aria-describedby={validationErrors.name ? 'name-error' : undefined}
@@ -139,7 +139,7 @@ export const ContactForm: React.FC = () => {
           <label
             htmlFor="email"
             className={`font-label-caps text-label-caps uppercase tracking-widest absolute transition-all duration-300 pointer-events-none ${
-              formData.email ? '-top-4 text-[10px] text-[#3E2723]' : 'top-4 text-[#3E2723]'
+              formData.email ? '-top-4 text-[10px] text-[#99FF99]' : 'top-4 text-[#99FF99]'
             }`}
           >
             Email *
@@ -154,8 +154,8 @@ export const ContactForm: React.FC = () => {
               if (validationErrors.email) setValidationErrors({ ...validationErrors, email: '' });
             }}
             placeholder=" "
-            className={`peer w-full bg-transparent border-b py-4 text-[#3E2723] font-body-md focus:outline-none transition-colors focus:bg-white/10 ${
-              validationErrors.email ? 'border-error text-error' : 'border-[#3E2723]/30 focus:border-[#3E2723]'
+            className={`peer w-full bg-transparent border-b py-4 text-[#99FF99] font-body-md focus:outline-none transition-colors focus:bg-white/10 ${
+              validationErrors.email ? 'border-error text-error' : 'border-[#99FF99]/30 focus:border-[#99FF99]'
             }`}
             aria-invalid={!!validationErrors.email}
             aria-describedby={validationErrors.email ? 'email-error' : undefined}
@@ -173,7 +173,7 @@ export const ContactForm: React.FC = () => {
       <div className="flex flex-col relative">
         <label
           htmlFor="project-type"
-          className="font-label-caps text-label-caps text-[#3E2723] uppercase tracking-widest mb-1"
+          className="font-label-caps text-label-caps text-[#99FF99] uppercase tracking-widest mb-1"
         >
           Project Type *
         </label>
@@ -186,32 +186,32 @@ export const ContactForm: React.FC = () => {
               setFormData({ ...formData, projectType: e.target.value });
               if (validationErrors.projectType) setValidationErrors({ ...validationErrors, projectType: '' });
             }}
-            className={`w-full bg-transparent border-b py-4 px-2 text-[#3E2723] font-body-md focus:outline-none transition-colors appearance-none cursor-pointer rounded-t-md ${
-              validationErrors.projectType ? 'border-error' : 'border-[#3E2723]/30 focus:border-[#3E2723]'
+            className={`w-full bg-transparent border-b py-4 px-2 text-[#99FF99] font-body-md focus:outline-none transition-colors appearance-none cursor-pointer rounded-t-md ${
+              validationErrors.projectType ? 'border-error' : 'border-[#99FF99]/30 focus:border-[#99FF99]'
             }`}
             aria-invalid={!!validationErrors.projectType}
             aria-describedby={validationErrors.projectType ? 'project-type-error' : undefined}
           >
-            <option value="" disabled className="bg-[#F5F5DC] text-[#3E2723]">
+            <option value="" disabled className="bg-[#2a0a3a] text-[#99FF99]">
               Select project scope...
             </option>
-            <option value="3D Web Experience" className="bg-[#F5F5DC] text-[#3E2723]">
+            <option value="3D Web Experience" className="bg-[#2a0a3a] text-[#99FF99]">
               3D Web Experience / WebGL
             </option>
-            <option value="Portfolio & Editorial" className="bg-[#F5F5DC] text-[#3E2723]">
+            <option value="Portfolio & Editorial" className="bg-[#2a0a3a] text-[#99FF99]">
               Portfolio & Editorial Website
             </option>
-            <option value="Interactive Application" className="bg-[#F5F5DC] text-[#3E2723]">
+            <option value="Interactive Application" className="bg-[#2a0a3a] text-[#99FF99]">
               Interactive Web Application
             </option>
-            <option value="Creative Development" className="bg-[#F5F5DC] text-[#3E2723]">
+            <option value="Creative Development" className="bg-[#2a0a3a] text-[#99FF99]">
               Creative Development & Architecture
             </option>
-            <option value="Other Scope" className="bg-[#F5F5DC] text-[#3E2723]">
+            <option value="Other Scope" className="bg-[#2a0a3a] text-[#99FF99]">
               Other / Custom Scope
             </option>
           </select>
-          <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#3E2723] pointer-events-none">
+          <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#99FF99] pointer-events-none">
             expand_more
           </span>
         </div>
@@ -228,7 +228,7 @@ export const ContactForm: React.FC = () => {
         <label
           htmlFor="description"
           className={`font-label-caps text-label-caps uppercase tracking-widest absolute transition-all duration-300 pointer-events-none ${
-            formData.description ? '-top-4 text-[10px] text-[#3E2723]' : 'top-4 text-[#3E2723]'
+            formData.description ? '-top-4 text-[10px] text-[#99FF99]' : 'top-4 text-[#99FF99]'
           }`}
         >
           Project Description *
@@ -243,8 +243,8 @@ export const ContactForm: React.FC = () => {
             if (validationErrors.description) setValidationErrors({ ...validationErrors, description: '' });
           }}
           placeholder=" "
-          className={`peer w-full bg-transparent border-b py-4 text-[#3E2723] font-body-md focus:outline-none transition-colors resize-none focus:bg-white/10 ${
-            validationErrors.description ? 'border-error text-error' : 'border-[#3E2723]/30 focus:border-[#3E2723]'
+          className={`peer w-full bg-transparent border-b py-4 text-[#99FF99] font-body-md focus:outline-none transition-colors resize-none focus:bg-white/10 ${
+            validationErrors.description ? 'border-error text-error' : 'border-[#99FF99]/30 focus:border-[#99FF99]'
           }`}
           aria-invalid={!!validationErrors.description}
           aria-describedby={validationErrors.description ? 'description-error' : undefined}
@@ -259,7 +259,7 @@ export const ContactForm: React.FC = () => {
 
       {/* Budget Radio Selectors */}
       <div className="flex flex-col gap-3 mt-2">
-        <span className="font-label-caps text-label-caps text-[#3E2723] uppercase tracking-widest">
+        <span className="font-label-caps text-label-caps text-[#99FF99] uppercase tracking-widest">
           Budget Tier (USD)
         </span>
         <div className="flex flex-wrap gap-3">
@@ -273,7 +273,7 @@ export const ContactForm: React.FC = () => {
                 onChange={() => setFormData({ ...formData, budget: opt.value })}
                 className="peer hidden"
               />
-              <div className="px-6 py-3 border border-[#3E2723]/30 rounded-full text-[#3E2723] peer-checked:bg-[#3E2723] peer-checked:text-[#F5F5DC] peer-checked:border-[#3E2723] peer-checked:font-semibold transition-all duration-300 hover:border-[#3E2723] font-label-mono text-label-mono uppercase tracking-wider">
+              <div className="px-6 py-3 border border-[#99FF99]/30 rounded-full text-[#99FF99] peer-checked:bg-[#99FF99] peer-checked:text-[#2a0a3a] peer-checked:border-[#99FF99] peer-checked:font-semibold transition-all duration-300 hover:border-[#99FF99] font-label-mono text-label-mono uppercase tracking-wider">
                 {opt.label}
               </div>
             </label>
@@ -293,12 +293,12 @@ export const ContactForm: React.FC = () => {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="mt-4 relative group overflow-hidden bg-[#3E2723] text-[#F5F5DC] border border-[#3E2723] rounded-xl py-6 px-8 flex items-center justify-between transition-all duration-500 hover:shadow-[0_0_20px_rgba(62,39,35,0.3)] disabled:pointer-events-none"
+        className="mt-4 relative group overflow-hidden bg-[#99FF99] text-[#2a0a3a] border border-[#99FF99] rounded-xl py-6 px-8 flex items-center justify-between transition-all duration-500 hover:shadow-[0_0_20px_rgba(153, 255, 153,0.3)] disabled:pointer-events-none"
       >
-        <span className="relative z-10 font-label-caps text-label-caps tracking-[0.2em] uppercase font-bold text-[#F5F5DC] transition-colors duration-500">
+        <span className="relative z-10 font-label-caps text-label-caps tracking-[0.2em] uppercase font-bold text-[#2a0a3a] transition-colors duration-500">
           Send Project Inquiry
         </span>
-        <span className="material-symbols-outlined relative z-10 text-[#F5F5DC] transition-all duration-500 transform group-hover:translate-x-2">
+        <span className="material-symbols-outlined relative z-10 text-[#2a0a3a] transition-all duration-500 transform group-hover:translate-x-2">
           arrow_forward
         </span>
 
@@ -308,7 +308,7 @@ export const ContactForm: React.FC = () => {
         {/* Loading Spinner Overlay */}
         {status === 'loading' && (
           <div className="absolute inset-0 bg-surface-container-high flex items-center justify-center z-20">
-            <span className="material-symbols-outlined animate-spin text-[#3E2723] text-[28px]">
+            <span className="material-symbols-outlined animate-spin text-[#99FF99] text-[28px]">
               progress_activity
             </span>
           </div>
@@ -317,7 +317,7 @@ export const ContactForm: React.FC = () => {
         {/* Success Overlay */}
         {status === 'success' && (
           <div className="absolute inset-0 bg-secondary-container flex items-center justify-center z-20 animate-in fade-in zoom-in-95 duration-300">
-            <span className="font-label-caps text-label-caps tracking-[0.2em] uppercase font-bold text-[#3E2723] flex items-center gap-2">
+            <span className="font-label-caps text-label-caps tracking-[0.2em] uppercase font-bold text-[#99FF99] flex items-center gap-2">
               <span className="material-symbols-outlined text-[22px]">check_circle</span>
               Received // Inquiry Dispatched
             </span>

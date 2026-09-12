@@ -1,17 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useLenis } from 'lenis/react';
 import { AnimatedLogo } from './AnimatedLogo';
+import { scrollToSection } from '../../lib/smooth';
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const lenis = useLenis();
   const isHomePage = location.pathname === '/';
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    // rAF-coalesced + only setState on threshold crossing — zero re-render jank
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      setScrolled((prev) => {
+        const next = window.scrollY > 20;
+        return prev === next ? prev : next;
+      });
     };
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    update();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -21,31 +37,24 @@ export const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const scrollToSectionId = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: 'smooth'
-      });
-    }
+    scrollToSection(lenis ?? null, id, -80);
   };
 
   // On homepage, nav items scroll to sections; on other pages, they navigate to home with hash
   const navLinks = [
     { name: 'Services', id: 'services', path: '/#services' },
-    { name: 'Work', id: 'work', path: '/work' },
     { name: 'About', id: 'about', path: '/#about' },
     { name: 'Contact', id: 'contact', path: '/#contact' },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, link: typeof navLinks[0]) => {
     if (isHomePage && link.path.startsWith('/#')) {
-      scrollToSection(e, link.id);
+      scrollToSectionId(e, link.id);
     }
-    // For non-hash routes (like /work), let React Router handle it naturally
+    // For non-hash routes, let React Router handle it naturally
     // For hash routes on non-home pages, navigate to home then scroll (handled by ScrollToTop)
   };
 
@@ -113,7 +122,7 @@ export const Navbar: React.FC = () => {
             {isHomePage ? (
               <a
                 href="#contact"
-                onClick={(e) => scrollToSection(e, 'contact')}
+                onClick={(e) => scrollToSectionId(e, 'contact')}
                 className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full border border-border-metallic text-white hover:text-white hover:border-secondary transition-all duration-300 font-label-mono text-label-mono uppercase bg-surface-muted/40 backdrop-blur-sm group"
               >
                 <span>Initiate Project</span>
@@ -174,7 +183,7 @@ export const Navbar: React.FC = () => {
                     <a
                       key={link.id}
                       href={`#${link.id}`}
-                      onClick={(e) => scrollToSection(e, link.id)}
+                      onClick={(e) => scrollToSectionId(e, link.id)}
                       className="font-headline-display text-3xl uppercase tracking-tight py-2 border-b border-border-metallic/40 flex justify-between items-center text-white"
                     >
                       <span>{link.name}</span>
@@ -204,7 +213,7 @@ export const Navbar: React.FC = () => {
             {isHomePage ? (
               <a
                 href="#contact"
-                onClick={(e) => scrollToSection(e, 'contact')}
+                onClick={(e) => scrollToSectionId(e, 'contact')}
                 className="w-full bg-primary text-white font-label-caps uppercase py-4 rounded-full text-center flex items-center justify-center gap-2"
               >
                 Start a Project

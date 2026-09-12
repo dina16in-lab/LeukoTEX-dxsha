@@ -15,18 +15,18 @@ export const PrivacyPolicyPage: React.FC = () => {
         >
           <Link
             to="/"
-            className="font-label-mono text-label-mono text-[#3E2723]/60 uppercase tracking-widest hover:text-[#3E2723] transition-colors flex items-center gap-2 w-fit"
+            className="font-label-mono text-label-mono text-[#99FF99]/60 uppercase tracking-widest hover:text-[#99FF99] transition-colors flex items-center gap-2 w-fit"
           >
             <span className="material-symbols-outlined text-[14px]">arrow_back</span>
             Back to Home
           </Link>
-          <span className="font-label-mono text-label-mono text-[#3E2723]/60 uppercase tracking-widest">
+          <span className="font-label-mono text-label-mono text-[#99FF99]/60 uppercase tracking-widest">
             LEGAL // PRIVACY
           </span>
-          <h1 className="font-headline-display text-4xl sm:text-5xl md:text-6xl text-[#3E2723] uppercase font-semibold tracking-tighter leading-tight">
+          <h1 className="font-headline-display text-4xl sm:text-5xl md:text-6xl text-[#99FF99] uppercase font-semibold tracking-tighter leading-tight">
             Privacy Policy
           </h1>
-          <p className="font-body-md text-[#3E2723]/70 text-base">
+          <p className="font-body-md text-[#99FF99]/70 text-base">
             Last updated: September 2026
           </p>
         </motion.div>
@@ -41,22 +41,22 @@ export const PrivacyPolicyPage: React.FC = () => {
           className="flex flex-col gap-12"
         >
           <article className="flex flex-col gap-4">
-            <h2 className="font-headline-lg-mobile text-2xl text-[#3E2723] font-medium">
+            <h2 className="font-headline-lg-mobile text-2xl text-[#99FF99] font-medium">
               1. Information We Collect
             </h2>
-            <p className="font-body-md text-[#3E2723]/80 leading-relaxed">
+            <p className="font-body-md text-[#99FF99]/80 leading-relaxed">
               When you use our contact form, we collect the following information: your name, email address, project type, project description, and budget range. This information is provided voluntarily and is necessary for us to understand and respond to your inquiry.
             </p>
           </article>
 
           <article className="flex flex-col gap-4">
-            <h2 className="font-headline-lg-mobile text-2xl text-[#3E2723] font-medium">
+            <h2 className="font-headline-lg-mobile text-2xl text-[#99FF99] font-medium">
               2. How We Use Your Information
             </h2>
-            <p className="font-body-md text-[#3E2723]/80 leading-relaxed">
+            <p className="font-body-md text-[#99FF99]/80 leading-relaxed">
               We use the information you provide to:
             </p>
-            <ul className="list-disc list-inside font-body-md text-[#3E2723]/80 leading-relaxed space-y-2 pl-4">
+            <ul className="list-disc list-inside font-body-md text-[#99FF99]/80 leading-relaxed space-y-2 pl-4">
               <li>Respond to your project inquiry</li>
               <li>Communicate with you about potential projects</li>
               <li>Send you relevant follow-up information</li>
@@ -65,46 +65,46 @@ export const PrivacyPolicyPage: React.FC = () => {
           </article>
 
           <article className="flex flex-col gap-4">
-            <h2 className="font-headline-lg-mobile text-2xl text-[#3E2723] font-medium">
+            <h2 className="font-headline-lg-mobile text-2xl text-[#99FF99] font-medium">
               3. Data Storage & Security
             </h2>
-            <p className="font-body-md text-[#3E2723]/80 leading-relaxed">
+            <p className="font-body-md text-[#99FF99]/80 leading-relaxed">
               Your data is stored securely on our servers. We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
             </p>
           </article>
 
           <article className="flex flex-col gap-4">
-            <h2 className="font-headline-lg-mobile text-2xl text-[#3E2723] font-medium">
+            <h2 className="font-headline-lg-mobile text-2xl text-[#99FF99] font-medium">
               4. Third-Party Sharing
             </h2>
-            <p className="font-body-md text-[#3E2723]/80 leading-relaxed">
+            <p className="font-body-md text-[#99FF99]/80 leading-relaxed">
               We do not sell, trade, or otherwise transfer your personal information to third parties. Your data is used exclusively for the purposes described in this policy.
             </p>
           </article>
 
           <article className="flex flex-col gap-4">
-            <h2 className="font-headline-lg-mobile text-2xl text-[#3E2723] font-medium">
+            <h2 className="font-headline-lg-mobile text-2xl text-[#99FF99] font-medium">
               5. Your Rights
             </h2>
-            <p className="font-body-md text-[#3E2723]/80 leading-relaxed">
+            <p className="font-body-md text-[#99FF99]/80 leading-relaxed">
               You have the right to request access to, correction of, or deletion of your personal information at any time. To exercise these rights, please contact us at{' '}
-              <a href="mailto:dina16in@gmail.com" className="text-[#3E2723] underline underline-offset-4 hover:text-[#3E2723]/70 transition-colors">
+              <a href="mailto:dina16in@gmail.com" className="text-[#99FF99] underline underline-offset-4 hover:text-[#99FF99]/70 transition-colors">
                 dina16in@gmail.com
               </a>.
             </p>
           </article>
 
           <article className="flex flex-col gap-4">
-            <h2 className="font-headline-lg-mobile text-2xl text-[#3E2723] font-medium">
+            <h2 className="font-headline-lg-mobile text-2xl text-[#99FF99] font-medium">
               6. Contact
             </h2>
-            <p className="font-body-md text-[#3E2723]/80 leading-relaxed">
+            <p className="font-body-md text-[#99FF99]/80 leading-relaxed">
               If you have any questions about this Privacy Policy, please contact us:
             </p>
-            <div className="p-6 rounded-2xl bg-white/30 border border-[#3E2723]/10 backdrop-blur-sm">
-              <p className="font-body-md text-[#3E2723] font-semibold">LEUKOTEX Studio</p>
-              <p className="font-body-md text-[#3E2723]/70">Chennai, Near Tambaram / Vandalur</p>
-              <a href="mailto:dina16in@gmail.com" className="font-body-md text-[#3E2723] underline underline-offset-4 hover:text-[#3E2723]/70 transition-colors">
+            <div className="p-6 rounded-2xl bg-white/30 border border-[#99FF99]/10 backdrop-blur-sm">
+              <p className="font-body-md text-[#99FF99] font-semibold">LEUKOTEX Studio</p>
+              <p className="font-body-md text-[#99FF99]/70">Chennai, Near Tambaram / Vandalur</p>
+              <a href="mailto:dina16in@gmail.com" className="font-body-md text-[#99FF99] underline underline-offset-4 hover:text-[#99FF99]/70 transition-colors">
                 dina16in@gmail.com
               </a>
             </div>

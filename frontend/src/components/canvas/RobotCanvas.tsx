@@ -49,11 +49,11 @@ export const RobotCanvas: React.FC<RobotCanvasProps> = ({ className = '' }) => {
     spotLight.position.set(10, 10, 10);
     scene.add(spotLight);
 
-    const pointLight = new THREE.PointLight(0x18a0fb, 2, 15);
+    const pointLight = new THREE.PointLight(0x39ff14, 2, 15);
     pointLight.position.set(-4, -1, 4);
     scene.add(pointLight);
 
-    const rimLight = new THREE.PointLight(0x9acbff, 1.2, 10);
+    const rimLight = new THREE.PointLight(0x99ff99, 1.2, 10);
     rimLight.position.set(3, 2, -2);
     scene.add(rimLight);
 
@@ -99,7 +99,7 @@ export const RobotCanvas: React.FC<RobotCanvasProps> = ({ className = '' }) => {
 
     // Internal Azure Glowing Core
     const coreGeom = new THREE.CylinderGeometry(0.35, 0.35, 0.65, 24);
-    const coreMat = new THREE.MeshBasicMaterial({ color: 0x18a0fb });
+    const coreMat = new THREE.MeshBasicMaterial({ color: 0x39ff14 });
     const core = new THREE.Mesh(coreGeom, coreMat);
     core.position.y = -1.25;
     robotGroup.add(core);

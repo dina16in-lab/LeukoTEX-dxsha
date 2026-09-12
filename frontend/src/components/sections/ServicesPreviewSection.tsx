@@ -28,12 +28,12 @@ export const ServicesPreviewSection: React.FC = () => {
     <section className="w-full py-section-gap px-margin-mobile md:px-margin-desktop bg-transparent relative max-w-7xl mx-auto">
       <div className="flex flex-col gap-12">
         <div className="flex justify-between items-end border-b border-border-metallic pb-6">
-          <span className="font-label-mono text-label-mono text-[#3E2723] uppercase tracking-widest">
+          <span className="font-label-mono text-label-mono text-[#99FF99] uppercase tracking-widest">
             03 // What We Do
           </span>
           <a
             href="#services"
-            className="text-[#3E2723] hover:text-[#3E2723] transition-colors font-label-mono text-xs uppercase tracking-wider flex items-center gap-1"
+            className="text-[#99FF99] hover:text-[#99FF99] transition-colors font-label-mono text-xs uppercase tracking-wider flex items-center gap-1"
           >
             <span>All Services</span>
             <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
@@ -54,24 +54,24 @@ export const ServicesPreviewSection: React.FC = () => {
                 className="group flex flex-col md:flex-row md:items-center justify-between py-10 border-b border-border-metallic hover:bg-surface-container-low/60 transition-all duration-400 px-6 -mx-6 rounded-xl cursor-pointer backdrop-blur-sm"
               >
                 <div className="flex items-start md:items-center gap-6">
-                  <span className="font-label-mono text-sm text-[#3E2723] group-hover:text-[#3E2723] transition-colors">
+                  <span className="font-label-mono text-sm text-[#99FF99] group-hover:text-[#99FF99] transition-colors">
                     {item.id}
                   </span>
                   <div className="flex flex-col gap-1">
-                    <h4 className="font-headline-lg-mobile text-2xl md:text-3xl text-[#3E2723] group-hover:text-[#3E2723] transition-colors">
+                    <h4 className="font-headline-lg-mobile text-2xl md:text-3xl text-[#99FF99] group-hover:text-[#99FF99] transition-colors">
                       {item.title}
                     </h4>
-                    <span className="font-label-mono text-[11px] text-[#3E2723] uppercase tracking-wider">
+                    <span className="font-label-mono text-[11px] text-[#99FF99] uppercase tracking-wider">
                       {item.tags}
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-6 mt-4 md:mt-0">
-                  <p className="font-body-md text-sm text-[#3E2723] md:max-w-xs group-hover:text-[#3E2723] transition-colors">
+                  <p className="font-body-md text-sm text-[#99FF99] md:max-w-xs group-hover:text-[#99FF99] transition-colors">
                     {item.desc}
                   </p>
-                  <span className="material-symbols-outlined text-[#3E2723] group-hover:text-[#3E2723] group-hover:translate-x-2 transition-all duration-300">
+                  <span className="material-symbols-outlined text-[#99FF99] group-hover:text-[#99FF99] group-hover:translate-x-2 transition-all duration-300">
                     arrow_forward
                   </span>
                 </div>

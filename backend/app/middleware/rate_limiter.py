@@ -88,6 +88,11 @@ class RateLimiter:
         retry = int((oldest + self.window_seconds) - time.monotonic()) + 1
         return max(1, retry)
 
+    def reset(self) -> None:
+        """Clear all tracked requests — useful for testing."""
+        self._store.clear()
+        self._last_cleanup = time.monotonic()
+
 
 def get_client_ip(request: Request) -> str:
     """Extract client IP, respecting X-Forwarded-For when behind proxy."""
@@ -130,3 +135,9 @@ contact_hourly_limiter = RateLimiter(max_requests=20, window_seconds=3600, prefi
 # Auth: 10 login attempts per minute per IP, 30 per 5 minutes
 auth_limiter = RateLimiter(max_requests=10, window_seconds=60, prefix="auth")
 auth_strict_limiter = RateLimiter(max_requests=30, window_seconds=300, prefix="auth_strict")
+
+
+def reset_all_limiters() -> None:
+    """Reset all global limiters — call in tests to isolate rate limiting."""
+    for limiter in (contact_limiter, contact_hourly_limiter, auth_limiter, auth_strict_limiter):
+        limiter.reset()

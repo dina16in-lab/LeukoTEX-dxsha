@@ -43,12 +43,12 @@ export const Logo3DCanvas: React.FC<{ className?: string }> = ({ className = '' 
     mainLight.position.set(2, 5, 5);
     scene.add(mainLight);
 
-    // Colored accents matching the new logo gradient
-    const lilacLight = new THREE.PointLight(0xC9A0DC, 8, 20); // Lilac
+    // Colored accents matching the neon green theme
+    const lilacLight = new THREE.PointLight(0x99FF99, 8, 20); // Light neon green
     lilacLight.position.set(-3, 3, 2);
     scene.add(lilacLight);
 
-    const coralLight = new THREE.PointLight(0xFF9E9E, 8, 20); // Coral
+    const coralLight = new THREE.PointLight(0x39FF14, 8, 20); // Strong neon green
     coralLight.position.set(3, -3, 2);
     scene.add(coralLight);
 
@@ -57,7 +57,7 @@ export const Logo3DCanvas: React.FC<{ className?: string }> = ({ className = '' 
 
     // Premium Frosted Glass Material
     const glassMat = new THREE.MeshPhysicalMaterial({
-      color: 0x5D3A1A,
+      color: 0x39FF14,
       metalness: 0.15,
       roughness: 0.2,
       transmission: 0.4, 
@@ -113,8 +113,8 @@ export const Logo3DCanvas: React.FC<{ className?: string }> = ({ className = '' 
 
     // Add some floating glowing particles to enhance immersion
     const particleGeo = new THREE.SphereGeometry(0.04, 8, 8);
-    const particleMat1 = new THREE.MeshBasicMaterial({ color: 0xC9A0DC });
-    const particleMat2 = new THREE.MeshBasicMaterial({ color: 0xFF9E9E });
+    const particleMat1 = new THREE.MeshBasicMaterial({ color: 0x99FF99 });
+    const particleMat2 = new THREE.MeshBasicMaterial({ color: 0x39FF14 });
     const particles: THREE.Mesh[] = [];
 
     for(let i=0; i<12; i++) {

@@ -13,14 +13,14 @@ export const ContactPage: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col gap-4 max-w-3xl"
         >
-          <span className="font-label-mono text-label-mono text-[#3E2723] uppercase tracking-widest">
+          <span className="font-label-mono text-label-mono text-[#99FF99] uppercase tracking-widest">
             START A PROJECT // LET'S TALK
           </span>
-          <h1 className="font-headline-display text-4xl sm:text-5xl md:text-6xl lg:text-[76px] text-[#3E2723] uppercase font-bold tracking-tighter leading-tight">
+          <h1 className="font-headline-display text-4xl sm:text-5xl md:text-6xl lg:text-[76px] text-[#99FF99] uppercase font-bold tracking-tighter leading-tight">
             Have an idea?<br />
             Let's build it.
           </h1>
-          <p className="font-body-md text-base sm:text-lg text-[#3E2723] max-w-xl leading-relaxed">
+          <p className="font-body-md text-base sm:text-lg text-[#99FF99] max-w-xl leading-relaxed">
             Tell us what you have in mind. Whether you need a website, UI/UX design, product website, or an interactive 3D experience, LEUKOTEX can help turn your idea into a working digital experience.
           </p>
         </motion.div>
@@ -53,7 +53,7 @@ export const ContactPage: React.FC = () => {
                 backgroundImage: "url('/contact_art_beige.jpg')",
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#3E2723]/90 via-[#3E2723]/20 to-transparent opacity-80" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#99FF99]/90 via-[#99FF99]/20 to-transparent opacity-80" />
             <div className="absolute bottom-6 left-6 right-6 flex flex-col gap-2">
               <span className="font-label-mono text-xs text-white uppercase tracking-widest">
                 LEUKOTEX // CONTACT
@@ -74,46 +74,46 @@ export const ContactPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Location */}
           <div className="flex flex-col gap-4">
-            <span className="font-label-mono text-label-mono text-[#3E2723] uppercase tracking-widest">
+            <span className="font-label-mono text-label-mono text-[#99FF99] uppercase tracking-widest">
               LOCATION
             </span>
             <div className="flex flex-col gap-1">
-              <p className="font-body-md text-lg text-[#3E2723] font-semibold">LEUKOTEX</p>
-              <p className="font-body-md text-[#3E2723]">Chennai</p>
-              <p className="font-body-md text-[#3E2723]">Near Tambaram / Vandalur</p>
+              <p className="font-body-md text-lg text-[#99FF99] font-semibold">LEUKOTEX</p>
+              <p className="font-body-md text-[#99FF99]">Chennai</p>
+              <p className="font-body-md text-[#99FF99]">Near Tambaram / Vandalur</p>
             </div>
           </div>
 
           {/* Contact */}
           <div className="flex flex-col gap-4">
-            <span className="font-label-mono text-label-mono text-[#3E2723] uppercase tracking-widest">
+            <span className="font-label-mono text-label-mono text-[#99FF99] uppercase tracking-widest">
               CONTACT
             </span>
             <div className="flex flex-col gap-3">
               <a
                 href="mailto:dina16in@gmail.com"
-                className="font-headline-lg-mobile text-2xl sm:text-3xl text-[#3E2723] hover:text-[#3E2723] transition-colors group flex items-center gap-2"
+                className="font-headline-lg-mobile text-2xl sm:text-3xl text-[#99FF99] hover:text-[#99FF99] transition-colors group flex items-center gap-2"
               >
                 <span>dina16in@gmail.com</span>
-                <span className="material-symbols-outlined text-[24px] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#3E2723]">
+                <span className="material-symbols-outlined text-[24px] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#99FF99]">
                   arrow_outward
                 </span>
               </a>
               <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 pt-1">
                 <a
                   href="tel:+916379323253"
-                  className="font-body-md text-[#3E2723] hover:text-[#3E2723] transition-colors flex items-center gap-2"
+                  className="font-body-md text-[#99FF99] hover:text-[#99FF99] transition-colors flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-[18px] text-[#3E2723]">call</span>
+                  <span className="material-symbols-outlined text-[18px] text-[#99FF99]">call</span>
                   <span>6379323253</span>
                 </a>
                 <a
                   href="https://wa.me/916379323253"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-body-md text-[#3E2723] hover:text-[#3E2723] transition-colors flex items-center gap-2"
+                  className="font-body-md text-[#99FF99] hover:text-[#99FF99] transition-colors flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-[18px] text-[#3E2723]">chat</span>
+                  <span className="material-symbols-outlined text-[18px] text-[#99FF99]">chat</span>
                   <span>WhatsApp / 6379323253</span>
                 </a>
               </div>

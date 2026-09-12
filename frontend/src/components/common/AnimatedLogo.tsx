@@ -10,7 +10,7 @@ export const AnimatedLogo: React.FC<AnimatedLogoProps> = ({ compact = false, cla
   if (compact) {
     return (
       <Link to="/" className={`flex flex-col group ${className}`}>
-        <span className="font-headline-lg-mobile text-[18px] tracking-[0.2em] uppercase font-bold text-[#3E2723] transition-colors group-hover:text-[#3E2723]-fixed">
+        <span className="font-headline-lg-mobile text-[18px] tracking-[0.2em] uppercase font-bold text-[#99FF99] transition-colors group-hover:text-[#99FF99]-fixed">
           LEUKOTEX
         </span>
       </Link>
@@ -23,12 +23,12 @@ export const AnimatedLogo: React.FC<AnimatedLogoProps> = ({ compact = false, cla
         <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-md" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#C9A0DC" /> {/* Lilac */}
-              <stop offset="100%" stopColor="#FF9E9E" /> {/* Coral */}
+              <stop offset="0%" stopColor="#99FF99" />
+              <stop offset="100%" stopColor="#39FF14" />
             </linearGradient>
             <linearGradient id="logoGradientDark" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#B680C9" />
-              <stop offset="100%" stopColor="#FA8080" />
+              <stop offset="0%" stopColor="#39FF14" />
+              <stop offset="100%" stopColor="#00FF00" />
             </linearGradient>
           </defs>
           
@@ -45,7 +45,7 @@ export const AnimatedLogo: React.FC<AnimatedLogoProps> = ({ compact = false, cla
         </svg>
       </div>
       <div className="flex flex-col items-center mt-[-4px]">
-        <span className="font-headline-lg-mobile text-[14px] tracking-[0.25em] uppercase font-bold text-[#b5a3ac] group-hover:text-[#3E2723] transition-colors">
+        <span className="font-headline-lg-mobile text-[14px] tracking-[0.25em] uppercase font-bold text-[#99FF99] group-hover:text-[#39FF14] transition-colors">
           LEUKOTEX
         </span>
       </div>

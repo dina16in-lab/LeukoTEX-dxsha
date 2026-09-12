@@ -35,13 +35,13 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantClasses = {
     primary:
-      'bg-primary text-[#3E2723] font-label-caps uppercase hover:bg-tertiary transition-all duration-400 ease-out hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-white/5',
+      'bg-primary text-[#99FF99] font-label-caps uppercase hover:bg-tertiary transition-all duration-400 ease-out hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-white/5',
     secondary:
-      'border border-border-metallic text-[#3E2723] font-label-caps uppercase hover:bg-surface-container-high transition-all duration-400 ease-out relative overflow-hidden group bg-background/50 backdrop-blur-sm',
+      'border border-border-metallic text-[#99FF99] font-label-caps uppercase hover:bg-surface-container-high transition-all duration-400 ease-out relative overflow-hidden group bg-background/50 backdrop-blur-sm',
     outline:
-      'border border-border-metallic text-[#3E2723] hover:text-[#3E2723] hover:border-primary/50 font-label-mono uppercase transition-colors duration-300',
+      'border border-border-metallic text-[#99FF99] hover:text-[#99FF99] hover:border-primary/50 font-label-mono uppercase transition-colors duration-300',
     ghost:
-      'text-[#3E2723] hover:text-[#3E2723] font-label-caps uppercase transition-colors duration-300',
+      'text-[#99FF99] hover:text-[#99FF99] font-label-caps uppercase transition-colors duration-300',
   }[variant];
 
   const content = (

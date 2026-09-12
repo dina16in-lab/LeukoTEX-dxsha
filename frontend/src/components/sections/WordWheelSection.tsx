@@ -20,9 +20,9 @@ export const WordWheelSection: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative w-full py-40 bg-[#F5F5DC] flex flex-col md:flex-row justify-center items-center gap-4 overflow-hidden">
+    <section className="relative w-full py-40 bg-[#2a0a3a] flex flex-col md:flex-row justify-center items-center gap-4 overflow-hidden">
       
-      <h2 className="font-display text-5xl md:text-8xl text-[#3E2723]">
+      <h2 className="font-display text-5xl md:text-8xl text-[#99FF99]">
         everyone's an
       </h2>
       
