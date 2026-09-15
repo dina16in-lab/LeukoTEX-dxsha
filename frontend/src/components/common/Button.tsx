@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
 interface ButtonProps {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -18,7 +17,6 @@ interface ButtonProps {
 export const Button: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',
-  size = 'md',
   href,
   to,
   onClick,
@@ -27,29 +25,17 @@ export const Button: React.FC<ButtonProps> = ({
   icon,
   disabled = false,
 }) => {
-  const sizeClasses = {
-    sm: 'px-5 py-2.5 text-[11px]',
-    md: 'px-8 py-4 text-label-caps',
-    lg: 'px-10 py-5 text-label-caps',
-  }[size];
-
-  const variantClasses = {
-    primary:
-      'bg-primary text-[#99FF99] font-label-caps uppercase hover:bg-tertiary transition-all duration-400 ease-out hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-white/5',
-    secondary:
-      'border border-border-metallic text-[#99FF99] font-label-caps uppercase hover:bg-surface-container-high transition-all duration-400 ease-out relative overflow-hidden group bg-background/50 backdrop-blur-sm',
-    outline:
-      'border border-border-metallic text-[#99FF99] hover:text-[#99FF99] hover:border-primary/50 font-label-mono uppercase transition-colors duration-300',
-    ghost:
-      'text-[#99FF99] hover:text-[#99FF99] font-label-caps uppercase transition-colors duration-300',
-  }[variant];
+  const typeClass = variant === 'primary' ? 'type--A' : variant === 'secondary' ? 'type--B' : 'type--C';
+  
+  const combinedClasses = `button ${typeClass} ${className} flex justify-center items-center ${
+    disabled ? 'opacity-50 pointer-events-none' : ''
+  }`;
 
   const content = (
     <>
-      {variant === 'secondary' && (
-        <div className="absolute inset-0 bg-glow-accent opacity-0 group-hover:opacity-20 transition-opacity blur-md pointer-events-none" />
-      )}
-      <span className="relative z-10 flex items-center justify-center gap-2">
+      <div className="button__line"></div>
+      <div className="button__line"></div>
+      <span className="button__text flex items-center justify-center gap-2">
         {children}
         {icon && (
           <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">
@@ -57,15 +43,12 @@ export const Button: React.FC<ButtonProps> = ({
           </span>
         )}
       </span>
+      <div className="button__drow1"></div>
+      <div className="button__drow2"></div>
     </>
   );
 
-  const combinedClasses = `inline-flex items-center justify-center rounded-full tracking-widest cursor-pointer select-none ${sizeClasses} ${variantClasses} ${className} ${
-    disabled ? 'opacity-50 pointer-events-none' : ''
-  }`;
-
   if (to) {
-    // Internal routes use React Router Link
     if (to.startsWith('/') || to.startsWith('#')) {
       return (
         <Link to={to} className={combinedClasses}>
@@ -89,9 +72,8 @@ export const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <button type={type} onClick={onClick} disabled={disabled} className={combinedClasses}>
+    <button type={type} onClick={onClick} disabled={disabled} className={combinedClasses} style={{ background: 'transparent', border: 'none' }}>
       {content}
     </button>
   );
 };
-

@@ -88,22 +88,22 @@ export const ScrollDrivenShapes = () => {
     <group ref={groupRef}>
       <Float speed={2} rotationIntensity={1.5} floatIntensity={2}>
         <mesh position={[3, 2, -2]}>
-          <torusKnotGeometry args={[1, 0.3, 72, 12]} />
-          <meshStandardMaterial color="#39FF14" roughness={0.28} metalness={0.15} transparent opacity={0.9} />
+          <icosahedronGeometry args={[1.2, 0]} />
+          <meshStandardMaterial color="#99FF99" emissive="#99FF99" emissiveIntensity={0.4} roughness={0.2} metalness={0.2} transparent opacity={0.9} />
         </mesh>
       </Float>
 
       <Float speed={1.5} rotationIntensity={2} floatIntensity={1.5}>
         <mesh position={[-3, -1, -1]}>
-          <octahedronGeometry args={[1.5, 0]} />
-          <meshStandardMaterial color="#99FF99" roughness={0.35} metalness={0.1} transparent opacity={0.85} />
+          <dodecahedronGeometry args={[1.3, 0]} />
+          <meshStandardMaterial color="#99FF99" emissive="#99FF99" emissiveIntensity={0.4} roughness={0.1} metalness={0.2} transparent opacity={0.85} />
         </mesh>
       </Float>
 
       <Float speed={2.5} rotationIntensity={1} floatIntensity={3}>
         <mesh position={[2, -4, -3]}>
-          <sphereGeometry args={[1.2, 32, 32]} />
-          <meshStandardMaterial color="#00FF00" roughness={0.3} metalness={0.2} transparent opacity={0.8} />
+          <torusGeometry args={[1, 0.4, 16, 100]} />
+          <meshStandardMaterial color="#99FF99" emissive="#99FF99" emissiveIntensity={0.4} roughness={0.4} metalness={0.2} transparent opacity={0.8} />
         </mesh>
       </Float>
     </group>
