@@ -2,13 +2,23 @@ import type { Project, ServiceItemData, ContactFormData } from '../types';
 import { INITIAL_PROJECTS } from '../data/projects';
 import { SERVICES_DATA } from '../data/services';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
+const getApiUrl = (endpoint: string) => {
+  const base = import.meta.env.VITE_API_URL || '/api';
+  const cleanEndpoint = endpoint.replace(/^\//, '');
+  if (base.startsWith('http://') || base.startsWith('https://')) {
+    const cleanBase = base.replace(/\/$/, '');
+    return new URL(`${cleanBase}/${cleanEndpoint}`);
+  }
+  const cleanBase = base.replace(/\/$/, '');
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173';
+  return new URL(`${cleanBase}/${cleanEndpoint}`, origin);
+};
 
 export const api = {
   // GET /api/projects
   async getProjects(category?: string): Promise<Project[]> {
     try {
-      const url = new URL(`${API_BASE_URL}/projects`);
+      const url = getApiUrl('projects');
       if (category && category !== 'All') {
         url.searchParams.append('category', category);
       }
@@ -33,7 +43,8 @@ export const api = {
   // GET /api/projects/:slug
   async getProjectBySlug(slug: string): Promise<Project | null> {
     try {
-      const response = await fetch(`${API_BASE_URL}/projects/${slug}`);
+      const url = getApiUrl(`projects/${slug}`);
+      const response = await fetch(url.toString());
       if (!response.ok) {
         throw new Error(`Server returned ${response.status}`);
       }
@@ -49,7 +60,8 @@ export const api = {
   // GET /api/services
   async getServices(): Promise<ServiceItemData[]> {
     try {
-      const response = await fetch(`${API_BASE_URL}/services`);
+      const url = getApiUrl('services');
+      const response = await fetch(url.toString());
       if (!response.ok) {
         throw new Error(`Server returned ${response.status}`);
       }
@@ -64,7 +76,8 @@ export const api = {
   // GET /api/services/:idOrNumber
   async getServiceById(idOrNumber: string): Promise<ServiceItemData | null> {
     try {
-      const response = await fetch(`${API_BASE_URL}/services/${idOrNumber}`);
+      const url = getApiUrl(`services/${idOrNumber}`);
+      const response = await fetch(url.toString());
       if (!response.ok) {
         throw new Error(`Server returned ${response.status}`);
       }
@@ -89,7 +102,8 @@ export const api = {
       throw new Error('Please enter a valid email address.');
     }
 
-    const response = await fetch(`${API_BASE_URL}/contact`, {
+    const url = getApiUrl('contact');
+    const response = await fetch(url.toString(), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
